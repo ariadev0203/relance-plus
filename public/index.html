@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Relance+</title>
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="theme-color" content="#071d4d"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<style>
+:root{--navy:#071d4d;--navy2:#0d3a8c;--or:#f7931e;--bg:#f3f6fb;--card:#fff;--ink:#0f1f3d;--mute:#6b7792;--line:#e6ebf3;--red:#e53935;--grn:#2e9e57;--blu:#1e88c9;--yel:#e8a91c}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;height:100%}
+body{font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+[hidden]{display:none!important}button,input,select,textarea{font:inherit;color:inherit}
+input,select,textarea{width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:14px;background:#fff;margin:4px 0 10px}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--or);border-color:var(--or)}
+label{font-size:13px;font-weight:600;color:var(--mute)}
+.btn{display:block;width:100%;border:0;border-radius:16px;padding:15px;font-weight:700;background:var(--or);color:#fff;cursor:pointer}
+.btn.dk{background:var(--navy)}.btn.ln{background:transparent;border:1.5px solid #ffffff66;color:#fff}.btn.lt{background:#fff;border:1.5px solid var(--line);color:var(--ink)}.btn:disabled{opacity:.5}
+.msg{font-size:14px;color:var(--mute);margin:6px 2px;min-height:1px}.msg.ok{color:var(--grn)}.msg.ko{color:var(--red)}
+/* connexion */
+#au{min-height:100%;background:radial-gradient(circle at 15% 0,#1f56b8 0,transparent 45%),linear-gradient(170deg,var(--navy2),var(--navy) 70%);color:#fff;padding:calc(env(safe-area-inset-top) + 28px) 24px calc(env(safe-area-inset-bottom) + 24px);display:flex;flex-direction:column}
+#au .scr{display:none;flex:1;flex-direction:column;max-width:420px;width:100%;margin:0 auto}#au .scr.on{display:flex}
+#au h1{font-size:34px;margin:6px 0 0;text-align:center;letter-spacing:.5px}#au h1 b{color:var(--or)}#au h2{margin:6px 0 14px;text-align:center}
+#au p.t{text-align:center;font-size:20px;font-weight:700;margin:22px 0}#au p.t b{color:var(--or)}
+#au label{color:#c7d5f2}#au input{background:#ffffff14;border-color:#ffffff40;color:#fff}#au input::placeholder{color:#ffffff80}
+#au .msg{color:#c7d5f2}#au .msg.ko{color:#ffb4b0}#au .msg.ok{color:#9be3b5}
+#au a,#au .lk{color:var(--or);background:none;border:0;font-weight:600;text-decoration:none;cursor:pointer;padding:8px;display:block;margin:auto}
+.lg{width:112px;height:112px;margin:16px auto 0;display:block}.sp{flex:1}
+.cd{background:#ffffff14;border:1px solid #ffffff30;border-radius:14px;padding:12px;font:15px/1.6 ui-monospace,Menlo,monospace;word-break:break-all;text-align:center}
+/* application */
+#ap{min-height:100%;padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+header{padding:calc(env(safe-area-inset-top) + 14px) 18px 6px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+header b{font-size:19px;text-transform:uppercase;letter-spacing:.3px}header span{font-size:13px;color:var(--mute)}
+main{padding:0 14px 20px}section{display:none}section.on{display:block}
+h2.o{color:var(--or);font-size:23px;margin:18px 4px 8px}
+.card{background:var(--card);border-radius:18px;box-shadow:0 2px 10px #1b2b5214;padding:6px 14px 14px;margin:8px 0}
+.tabs{display:flex;border-bottom:1px solid var(--line);margin:0 -14px 12px}.tabs button{flex:1;background:none;border:0;padding:13px 2px;font-weight:700;border-bottom:3px solid transparent;color:var(--ink)}.tabs button.on{color:var(--or);border-color:var(--or)}
+.row{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line);cursor:pointer}.row:first-child{border-top:0}
+.av{flex:none;width:46px;height:46px;border-radius:50%;color:#fff;font-weight:800;display:grid;place-items:center}
+.row .i{flex:1;min-width:0}.row .i b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.row .i small{color:var(--mute);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .d{text-align:right;font-size:13px;font-weight:700;white-space:nowrap}.pill{display:inline-block;color:#fff;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;margin-top:3px}
+.bg0{background:var(--red)}.bg1{background:var(--or)}.bg2{background:var(--yel)}.bg3{background:var(--grn)}.bg4{background:var(--blu)}.bgx{background:#8a94a8}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px}.chips button{flex:none;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;font-weight:700}.chips button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.kp{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:8px}.kp div{background:var(--bg);border-radius:14px;padding:12px}.kp b{display:block;font-size:26px;color:var(--navy)}.kp small{color:var(--mute)}
+details summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:12px 0 4px;font-weight:700;cursor:pointer}details summary::-webkit-details-marker{display:none}details summary em{color:var(--or);font-style:normal;font-size:14px}
+.star{background:none;border:0;font-size:24px;color:#c4cbd8;padding:4px 8px}.star.on{color:var(--or)}
+.df{display:flex;justify-content:space-between;gap:10px;margin-top:6px;font-size:14px}.df s{color:var(--mute)}
+nav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:5}
+nav button{flex:1;background:none;border:0;padding:9px 0 8px;color:var(--mute);font-size:12px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:3px;position:relative}
+nav button.on{color:var(--or)}nav svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav i{position:absolute;top:4px;left:calc(50% + 6px);background:var(--red);color:#fff;border-radius:99px;font-style:normal;font-size:11px;min-width:18px;padding:1px 5px}
+dialog{border:0;border-radius:22px;padding:18px;width:min(92vw,440px);max-height:90vh}dialog::backdrop{background:#071d4d99}
+</style></head>
+<body>
+<!-- ================= CONNEXION ================= -->
+<div id="au" hidden>
+ <section class="scr on" id="s-w">
+  <svg class="lg" viewBox="0 0 112 112" aria-hidden="true"><rect width="112" height="112" rx="26" fill="#fff"/><text x="30" y="82" font-family="system-ui,Arial" font-weight="900" font-size="78" fill="#0d3a8c">R</text><path d="M78 24v28M64 38h28" stroke="#f7931e" stroke-width="11" stroke-linecap="round"/></svg>
+  <h1>RELANCE<b>+</b></h1>
+  <p class="t">Ne laissez aucun abonné <b>vous échapper !</b></p><div class="sp"></div>
+  <button class="btn" data-s="s-l">Se connecter</button><div style="height:12px"></div><button class="btn ln" data-s="s-i">Créer un compte</button>
+  <p class="msg" style="text-align:center;margin-top:18px">RELANCE+ · Version 1.0</p>
+ </section>
+ <section class="scr" id="s-l"><h2>Connexion</h2>
+  <label for="le">Adresse e-mail</label><input id="le" type="email" autocomplete="username" autocapitalize="off">
+  <label for="lp">Mot de passe</label><input id="lp" type="password" autocomplete="current-password">
+  <label for="lc">Code Google Authenticator (ou code de secours)</label><input id="lc" inputmode="numeric" autocomplete="one-time-code" placeholder="6 chiffres">
+  <label style="display:flex;gap:8px;align-items:center;margin:2px 0 8px"><input id="lr" type="checkbox" style="width:auto;margin:0" checked> Rester connecté (30 jours)</label>
+  <button class="btn" id="lgo">Se connecter</button><div class="msg" id="lm" role="status"></div>
+  <button class="lk" data-s="s-f">Mot de passe oublié ?</button><button class="lk" data-s="s-w">Retour</button></section>
+ <section class="scr" id="s-i"><h2>Créer un compte</h2>
+  <label for="in">Nom du point de vente</label><input id="in" autocomplete="organization">
+  <label for="ie">Adresse e-mail</label><input id="ie" type="email" autocomplete="username" autocapitalize="off">
+  <label for="ip">Mot de passe (8 caractères, lettre + chiffre)</label><input id="ip" type="password" autocomplete="new-password">
+  <div id="iv" hidden><label for="ik">Code d'invitation</label><input id="ik" autocomplete="off"></div>
+  <button class="btn" id="igo">Continuer</button><div class="msg" id="im" role="status"></div><button class="lk" data-s="s-w">Retour</button></section>
+ <section class="scr" id="s-a"><h2>Activer la sécurité</h2>
+  <p class="msg">Dans Google Authenticator (ou une appli équivalente), ajoutez un compte avec cette clé :</p>
+  <div class="cd" id="as"></div><a id="ao" href="#">Ouvrir dans l'application d'authentification</a>
+  <label for="ac">Code à 6 chiffres affiché</label><input id="ac" inputmode="numeric" autocomplete="one-time-code">
+  <button class="btn" id="ago">Activer mon compte</button><div class="msg" id="am" role="status"></div></section>
+ <section class="scr" id="s-c"><h2>Codes de secours</h2>
+  <p class="msg">Notez-les : chacun sert une seule fois si vous perdez votre téléphone ou votre mot de passe.</p>
+  <div class="cd" id="cs"></div><div class="sp"></div><button class="btn" id="cgo">J'ai noté mes codes</button></section>
+ <section class="scr" id="s-f"><h2>Mot de passe oublié</h2>
+  <label for="fe">Adresse e-mail</label><input id="fe" type="email" autocapitalize="off">
+  <label for="fc">Code Google Authenticator ou code de secours</label><input id="fc" autocomplete="one-time-code">
+  <label for="fp">Nouveau mot de passe</label><input id="fp" type="password" autocomplete="new-password">
+  <button class="btn" id="fgo">Changer le mot de passe</button><div class="msg" id="fm" role="status"></div><button class="lk" data-s="s-l">Retour</button></section>
+</div>
+
+<!-- ================= APPLICATION ================= -->
+<div id="ap" hidden>
+ <header><b id="hn">Relance+</b><span id="hd"></span></header>
+ <main>
+  <section id="p-h" class="on">
+   <h2 class="o">Rechercher un abonné</h2>
+   <div class="card"><div class="tabs" id="st"><button data-k="d" class="on">Décodeur</button><button data-k="t">Mobile</button><button data-k="n">Nom</button><button data-k="a">N° abo.</button></div>
+    <input id="sq" inputmode="search" autocomplete="off" placeholder="Saisir le numéro de décodeur ici"><button class="btn dk" id="sgo">Rechercher</button><div class="msg" id="sm" role="status"></div><div id="sr"></div></div>
+   <h2 class="o">Relances à effectuer</h2><div class="msg" style="margin:-6px 4px 6px">Échéances dans les 5 prochains jours</div>
+   <div class="card" id="hl"></div><button class="lk" id="hm" style="display:block;margin:0 0 6px auto;background:none;border:0;color:var(--or);font-weight:700">Voir plus &gt;</button>
+   <div class="card"><details><summary>Indicateurs de suivi <em>Voir les indicateurs ⌄</em></summary><div class="kp" id="kp"></div></details></div>
+  </section>
+  <section id="p-s"><h2 class="o">Suivi client</h2>
+   <div class="chips" id="sf"><button data-f="all" class="on">Tous</button><button data-f="fav">Favoris</button><button data-f="rel">À relancer</button><button data-f="rap">Rappels</button></div>
+   <div class="card" id="sl"></div></section>
+  <section id="p-r"><h2 class="o">Relance</h2>
+   <div class="card"><p class="msg">Compare vos clients enregistrés avec la base Veo Pro et signale les différences. Vous validez chaque mise à jour.</p>
+    <button class="btn dk" id="rgo">Lancer la comparaison</button><div class="msg" id="rm" role="status"></div></div><div id="rl"></div></section>
+  <section id="p-n"><h2 class="o">Alertes</h2><div id="nl"></div></section>
+  <section id="p-c"><h2 class="o">Compte</h2>
+   <div class="card"><p><b id="cn"></b><br><span class="msg" id="ce"></span></p></div>
+   <div class="card"><h3 style="margin:10px 0 0">Compte Veo Pro</h3><p class="msg">Moteur de recherche et promotions. Enregistré uniquement sur cet appareil.</p>
+    <label for="vu">Identifiant Veo Pro</label><input id="vu" autocomplete="off" autocapitalize="off"><label for="vp">Mot de passe Veo Pro</label><input id="vp" type="password" autocomplete="off">
+    <button class="btn dk" id="vg">Tester et enregistrer</button><div class="msg" id="vm" role="status"></div></div>
+   <div class="card"><h3 style="margin:10px 0 0">Notifications avant échéance</h3>
+    <label for="cd">Prévenir</label><select id="cd"><option value="1">1 jour avant</option><option value="2">2 jours avant</option><option value="3">3 jours avant</option><option value="5">5 jours avant</option><option value="7">7 jours avant</option></select>
+    <button class="btn lt" id="cnb">Activer les notifications du téléphone</button><div class="msg" id="cm">Les alertes s'affichent à l'ouverture de l'application.</div></div>
+   <button class="btn lt" id="out">Se déconnecter</button></section>
+ </main>
+ <nav id="nv">
+  <button data-p="h" class="on"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</button>
+  <button data-p="s"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5c2 .7 3.5 2.4 3.5 5.5"/></svg>Suivi</button>
+  <button data-p="r"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg>Relance</button>
+  <button data-p="n"><svg viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0 1 12 0v6l2 2H4zM10 21h4"/></svg>Alertes<i id="nb" hidden></i></button>
+  <button data-p="c"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>Compte</button>
+ </nav>
+</div>
+
+<dialog id="fi"><h3 id="ft" style="margin:0 0 4px"></h3><div class="msg" id="fs"></div>
+ <label for="fn">Nom</label><input id="fn"><label for="ft2">Téléphone du client (obligatoire, 9 chiffres)</label><input id="ft2" type="tel" inputmode="tel">
+ <label for="fr">Rappel (date)</label><input id="fr" type="date"><label for="fo">Note</label><textarea id="fo" rows="2"></textarea>
+ <label style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><input id="fv" type="checkbox" style="width:auto;margin:0"> Client favori</label>
+ <button class="btn" id="fsv">Enregistrer</button><div class="msg ko" id="fe2"></div>
+ <div style="display:flex;gap:10px;margin-top:8px"><button class="btn lt" id="fdl">Supprimer</button><button class="btn lt" id="fcl">Fermer</button></div></dialog>
+
+<script>
+const $=i=>document.getElementById(i),E=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])),LS=localStorage;
+const rd=(k,d)=>{try{const v=JSON.parse(LS.getItem(k));return v==null?d:v}catch(e){return d}},wr=(k,v)=>{try{LS.setItem(k,JSON.stringify(v))}catch(e){}};
+let TK=LS.getItem("rp_t")||"",EM=LS.getItem("rp_e")||"",VT=LS.getItem("rp_vt")||"",DB={},tab="d",filt="all",pend={};
+const K=k=>"rp_"+EM+"_"+k,n9=v=>String(v||"").replace(/\D/g,"").replace(/^237/,"").slice(-9),okT=v=>/^[6]\d{8}$/.test(n9(v));
+const day0=()=>{const d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate())},iso=d=>d?d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"):"";
+const pdate=s=>{const m=/(\d+)\/(\d+)\/(\d+)/.exec(s||"");return m?new Date(+m[3],m[2]-1,+m[1]):null},fr=s=>s?s.split("-").reverse().join("/"):"—";
+const dl=s=>s?Math.round((new Date(s+"T00:00:00")-day0())/864e5):null;
+const fnd=(o,k,r=[])=>{if(o&&typeof o==="object")for(const x in o){if(x===k&&o[x])r.push(String(o[x]));else fnd(o[x],k,r)}return r};
+const lab=n=>n==null?"—":n<0?"Échu J"+n:n===0?"Aujourd'hui":n===1?"Demain":"J + "+n,cl=n=>n==null?"bgx":n<=0?"bg0":n===1?"bg1":n===2?"bg2":n===3?"bg3":"bg4";
+const say=(id,t,c)=>{const e=$(id);e.textContent=t||"";e.className="msg"+(c?" "+c:"")};
+async function A(b){try{const r=await fetch("/.netlify/functions/relance-auth",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(b)});let d={};try{d=await r.json()}catch(e){}return{ok:r.ok,d}}catch(e){return{ok:false,d:{message:"Connexion internet indisponible."}}}}
+/* ---- écrans de connexion ---- */
+const sc=id=>document.querySelectorAll("#au .scr").forEach(s=>s.classList.toggle("on",s.id===id));
+document.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>sc(b.dataset.s));
+function enter(tk,em,nm){TK=tk;EM=em;LS.setItem("rp_t",tk);LS.setItem("rp_e",em);if(nm)LS.setItem("rp_n_"+em,nm);boot()}
+$("lgo").onclick=async()=>{say("lm","Connexion…");const r=await A({action:"login",email:$("le").value,password:$("lp").value,code:$("lc").value,remember:$("lr").checked});
+ if(r.ok&&r.d.token){$("lp").value=$("lc").value="";enter(r.d.token,$("le").value.trim().toLowerCase())}else say("lm",r.d.message||"Connexion refusée.","ko")};
+let reg={};
+$("igo").onclick=async()=>{say("im","Création…");reg={email:$("ie").value.trim().toLowerCase(),password:$("ip").value,name:$("in").value.trim(),invite:$("ik").value};
+ const r=await A({action:"register",...reg});if(!r.ok){say("im",r.d.message||"Inscription impossible.","ko");return}
+ $("as").textContent=r.d.secret;$("ao").href=r.d.otpauth;say("im","");sc("s-a")};
+$("ago").onclick=async()=>{say("am","Vérification…");const r=await A({action:"confirm",email:reg.email,password:reg.password,code:$("ac").value,remember:true});
+ if(!r.ok||!r.d.token){say("am",r.d.message||"Code incorrect.","ko");return}
+ reg.tk=r.d.token;$("cs").innerHTML=(r.d.recovery||[]).map(E).join("<br>");sc("s-c")};
+$("cgo").onclick=()=>enter(reg.tk,reg.email,reg.name);
+$("fgo").onclick=async()=>{say("fm","Envoi…");const r=await A({action:"reset",email:$("fe").value,code:$("fc").value,newPassword:$("fp").value});
+ if(r.ok){say("fm","");sc("s-l");$("le").value=$("fe").value;say("lm","Mot de passe changé. Connectez-vous.","ok")}else say("fm",r.d.message||"Impossible de changer le mot de passe.","ko")};
+$("out").onclick=()=>{["rp_t","rp_e"].forEach(k=>LS.removeItem(k));TK=EM="";location.reload()};
+/* ---- Veo Pro ---- */
+async function veo(path,method,body){const go=()=>fetch("/.netlify/functions/veo",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({path,method:method||"GET",body,token:VT})});
+ let r=await go();if(r.status===401&&path!=="/auth/login"){const c=rd(K("vc"),null);if(c){try{await vlogin(c.u,c.p);r=await go()}catch(e){}}}
+ let d={};try{d=await r.json()}catch(e){}
+ if(!r.ok)throw new Error(path==="/auth/login"?(d.message||"Identifiants Veo Pro incorrects."):r.status===401?"Veo Pro non connecté : renseignez-le dans Compte.":(d.message||"Erreur "+r.status));return d}
+async function vlogin(u,p){const d=await veo("/auth/login","POST",{username:u,password:p});VT=d.token;LS.setItem("rp_vt",VT)}
+async function vinfo(dec){const j=await veo("/cga-subs/init/v2","POST",{decoder_number:String(dec)}),sb=j.subscriber||{},c=sb.customer||{};
+ return{d:String(dec),n:((c.first_name||"")+" "+(c.last_name||"")).trim()||"Client",a:fnd(sb,"subscriber_number")[0]||"",o:String(sb.option||""),f:iso(pdate(sb.subscription_date&&sb.subscription_date.end))}}
+$("vg").onclick=async()=>{const u=$("vu").value.trim(),p=$("vp").value;if(!u||!p){say("vm","Saisissez l'identifiant et le mot de passe.","ko");return}
+ say("vm","Test en cours…");try{await vlogin(u,p);wr(K("vc"),{u,p});say("vm","Connexion réussie. Compte enregistré sur cet appareil.","ok")}catch(e){say("vm",e.message,"ko")}};
+/* ---- base clients (sauvegarde) ---- */
+const save=()=>wr(K("db"),DB),list=()=>Object.values(DB);
+const ini=n=>(String(n).trim().split(/\s+/).map(w=>w[0]).slice(0,2).join("")||"?").toUpperCase();
+function rowH(c){const n=dl(c.f);return`<div class="row" data-d="${E(c.d)}"><div class="av ${cl(n)}">${E(ini(c.n))}</div><div class="i"><b>${E(c.n)}</b><small>Décodeur : ${E(c.d)} • ${E(n9(c.t))}</small></div><div class="d">${lab(n)}<br><span class="pill ${cl(n)}">À relancer</span></div></div>`}
+function home(){const L=list().map(c=>({c,n:dl(c.f)})).filter(x=>x.n!=null&&x.n>=-5&&x.n<=5).sort((a,b)=>a.n-b.n);
+ $("hl").innerHTML=L.slice(0,5).map(x=>rowH(x.c)).join("")||'<p class="msg">Aucune échéance dans les 5 prochains jours.</p>';$("hm").hidden=L.length<=5;
+ const all=list(),due=all.filter(c=>{const n=dl(c.f);return n!=null&&n>=0&&n<=5}).length,ech=all.filter(c=>{const n=dl(c.f);return n!=null&&n<0}).length;
+ $("kp").innerHTML=[[all.length,"Clients enregistrés"],[due,"À relancer (5 jours)"],[ech,"Échus"],[all.filter(c=>c.v).length,"Favoris"]].map(k=>`<div><b>${k[0]}</b><small>${k[1]}</small></div>`).join("")}
+function suivi(){let L=list().map(c=>({c,n:dl(c.f)}));const t=iso(day0());
+ if(filt==="fav")L=L.filter(x=>x.c.v);else if(filt==="rel")L=L.filter(x=>x.n!=null&&x.n<=5);else if(filt==="rap")L=L.filter(x=>x.c.r&&x.c.r<=t);
+ L.sort((a,b)=>(a.n==null)-(b.n==null)||a.n-b.n);
+ $("sl").innerHTML=L.map(x=>{const c=x.c;return`<div class="row" data-d="${E(c.d)}"><div class="av ${cl(x.n)}">${E(ini(c.n))}</div><div class="i"><b>${E(c.n)}</b><small>${E(n9(c.t))} • fin ${fr(c.f)}${c.r?" • rappel "+fr(c.r):""}</small></div><button class="star${c.v?" on":""}" data-s="${E(c.d)}" aria-label="Favori">★</button></div>`}).join("")||'<p class="msg">Aucun client dans cette vue.</p>'}
+$("sf").onclick=e=>{const b=e.target.closest("button[data-f]");if(!b)return;filt=b.dataset.f;$("sf").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));suivi()};
+$("sl").onclick=e=>{const s=e.target.closest("button[data-s]");if(s){const c=DB[s.dataset.s];if(c){c.v=!c.v;save();suivi();home()}return}const r=e.target.closest(".row");if(r)fiche(r.dataset.d)};
+$("hl").onclick=e=>{const r=e.target.closest(".row");if(r)fiche(r.dataset.d)};$("hm").onclick=()=>{filt="rel";$("sf").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x.dataset.f==="rel"));go("s")};
+/* fiche client */
+let cur="";function fiche(d){const c=DB[d];if(!c)return;cur=d;$("ft").textContent=c.n;$("fs").textContent="Décodeur "+c.d+(c.a?" • abonné "+c.a:"")+" • "+(c.o||"offre ?")+" • fin "+fr(c.f);
+ $("fn").value=c.n;$("ft2").value=c.t||"";$("fr").value=c.r||"";$("fo").value=c.m||"";$("fv").checked=!!c.v;say("fe2","");$("fi").showModal()}
+$("fsv").onclick=()=>{const c=DB[cur];if(!okT($("ft2").value)){say("fe2","Téléphone obligatoire : 9 chiffres commençant par 6.","ko");return}
+ c.n=$("fn").value.trim()||c.n;c.t=n9($("ft2").value);c.r=$("fr").value;c.m=$("fo").value;c.v=$("fv").checked;save();$("fi").close();home();suivi();alerts()};
+$("fdl").onclick=()=>{if(confirm("Supprimer ce client de votre sauvegarde ?")){delete DB[cur];save();$("fi").close();home();suivi();alerts()}};$("fcl").onclick=()=>$("fi").close();
+/* recherche */
+const PH={d:"Saisir le numéro de décodeur ici",t:"Saisir le numéro de mobile",n:"Saisir le nom du client",a:"Saisir le numéro d'abonné"};
+$("st").onclick=e=>{const b=e.target.closest("button[data-k]");if(!b)return;tab=b.dataset.k;$("st").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));$("sq").placeholder=PH[tab];$("sq").inputMode=tab==="n"?"text":"numeric";say("sm","");$("sr").innerHTML=""};
+async function search(){const v=$("sq").value.trim(),box=$("sr");box.innerHTML="";if(!v){say("sm","Saisissez une valeur.","ko");return}
+ if(tab!=="d"){const q=v.toLowerCase(),L=list().filter(c=>tab==="t"?n9(c.t).includes(n9(v)):tab==="n"?c.n.toLowerCase().includes(q):String(c.a).includes(v));
+  say("sm",L.length?L.length+" client(s) dans votre sauvegarde.":"Aucun client enregistré. Cherchez par n° de décodeur pour interroger Veo Pro.");box.innerHTML=L.map(rowH).join("");return}
+ if(!/^\d{8,}$/.test(v)){say("sm","Numéro de décodeur : chiffres uniquement.","ko");return}
+ say("sm","Recherche chez Veo Pro…");try{const x=await vinfo(v);pend=x;const s=DB[x.d];say("sm","");
+  box.innerHTML=`<div class="df"><b>${E(x.n)}</b><span>${fr(x.f)}</span></div><div class="msg">Décodeur ${E(x.d)}${x.a?" • abonné "+E(x.a):""}${x.o?" • "+E(x.o):""}</div>`+
+  (s?`<button class="btn lt" id="sv">Voir la fiche enregistrée</button>`:`<label for="stt">Téléphone du client (obligatoire pour enregistrer)</label><input id="stt" type="tel" inputmode="tel" placeholder="6XXXXXXXX"><button class="btn" id="sv">Enregistrer le client</button>`);
+  $("sv").onclick=()=>{if(s){fiche(x.d);return}if(!okT($("stt").value)){say("sm","Téléphone obligatoire : 9 chiffres commençant par 6 (Veo Pro ne le fournit pas).","ko");return}
+   DB[x.d]={...x,t:n9($("stt").value),v:false,r:"",m:"",u:Date.now()};save();say("sm","Client enregistré.","ok");box.innerHTML="";$("sq").value="";home();suivi();alerts()}}
+ catch(e){say("sm",e.message,"ko")}}
+$("sgo").onclick=search;$("sq").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();search()}};
+/* relance : comparaison avec Veo Pro */
+let stop=false,run=false;
+$("rgo").onclick=async()=>{if(run){stop=true;return}const L=list();if(!L.length){say("rm","Aucun client enregistré.");return}
+ run=true;stop=false;$("rgo").textContent="Arrêter";$("rl").innerHTML="";let diff=0,i=0;
+ for(const c of L){if(stop)break;i++;say("rm","Comparaison "+i+"/"+L.length+"…");
+  try{const x=await vinfo(c.d),ch=[];if(x.f&&x.f!==c.f)ch.push(["Échéance",fr(c.f),fr(x.f)]);if(x.o&&x.o!==c.o)ch.push(["Offre",c.o||"—",x.o]);if(x.n&&x.n!=="Client"&&x.n!==c.n)ch.push(["Nom",c.n,x.n]);
+   if(ch.length){diff++;const d=document.createElement("div");d.className="card";d.innerHTML=`<p style="margin:12px 0 4px"><b>${E(c.n)}</b> <span class="msg">Décodeur ${E(c.d)}</span></p>`+ch.map(k=>`<div class="df"><span>${k[0]}</span><span><s>${E(k[1])}</s> → <b>${E(k[2])}</b></span></div>`).join("")+`<button class="btn" style="margin-top:12px">Mettre à jour la fiche</button>`;
+    d.querySelector("button").onclick=ev=>{Object.assign(DB[c.d],{f:x.f||c.f,o:x.o||c.o,n:(x.n&&x.n!=="Client")?x.n:c.n,up:Date.now()});save();d.remove();home();suivi();alerts();ev.target.disabled=true};$("rl").appendChild(d)}
+  }catch(e){say("rm",e.message,"ko");break}await new Promise(r=>setTimeout(r,350))}
+ run=false;$("rgo").textContent="Lancer la comparaison";if(!$("rm").classList.contains("ko"))say("rm",stop?"Comparaison arrêtée.":diff?diff+" client(s) à mettre à jour.":"Tout est à jour : aucune différence avec Veo Pro.","ok")};
+/* alertes : échéances proches, rappels, promotions Veo Pro */
+let promo=null,promoErr="";
+function due(){const N=+rd(K("ad"),3),t=iso(day0());return{ech:list().map(c=>({c,n:dl(c.f)})).filter(x=>x.n!=null&&x.n<=N&&x.n>=-30).sort((a,b)=>a.n-b.n),rap:list().filter(c=>c.r&&c.r<=t)}}
+function alerts(){const D=due(),tot=D.ech.length+D.rap.length;$("nb").hidden=!tot;$("nb").textContent=tot;let h="";
+ h+=`<div class="card"><h3 style="margin:12px 0 0">Échéances proches</h3>`+(D.ech.map(x=>rowH(x.c)).join("")||'<p class="msg">Aucune échéance proche.</p>')+`</div>`;
+ h+=`<div class="card"><h3 style="margin:12px 0 0">Rappels du jour</h3>`+(D.rap.map(c=>`<div class="row" data-d="${E(c.d)}"><div class="i"><b>${E(c.n)}</b><small>Rappel du ${fr(c.r)}${c.m?" • "+E(c.m):""}</small></div></div>`).join("")||'<p class="msg">Aucun rappel.</p>')+`</div>`;
+ h+=`<div class="card"><h3 style="margin:12px 0 0">Promotions Veo Pro</h3>`+(promo==null?'<p class="msg">'+E(promoErr||"Chargement…")+"</p>":promo.map(p=>`<div class="row" style="cursor:default"><div class="i" style="white-space:normal"><b style="white-space:normal">${E(p.title||p.subject||p.label||"Promotion")}</b><small style="white-space:normal">${E(p.message||p.body||p.content||p.description||"")}</small></div></div>`).join("")||'<p class="msg">Aucune promotion pour le moment.</p>')+`</div>`;
+ $("nl").innerHTML=h;return tot}
+$("nl").onclick=e=>{const r=e.target.closest(".row[data-d]");if(r)fiche(r.dataset.d)};
+async function loadPromo(){try{const d=await veo("/user-notifications?page=1&limit=20");promo=Array.isArray(d)?d:(d.data||d.items||d.notifications||d.rows||[]);promoErr=""}catch(e){promo=null;promoErr=e.message}alerts()}
+async function pushDue(){const D=due(),tot=D.ech.length+D.rap.length,day=iso(day0());if(!tot||!("Notification"in window)||Notification.permission!=="granted"||LS.getItem(K("pn"))===day)return;
+ LS.setItem(K("pn"),day);const o={body:D.ech.length+" échéance(s) proche(s), "+D.rap.length+" rappel(s).",icon:"icons/icon-192.png",tag:"relance"};
+ try{const r=await navigator.serviceWorker.getRegistration();r?r.showNotification("Relance+",o):new Notification("Relance+",o)}catch(e){}}
+$("cnb").onclick=async()=>{if(!("Notification"in window)){say("cm","Notifications non prises en charge ici (sur iPhone, installez d'abord l'application sur l'écran d'accueil).","ko");return}
+ const p=await Notification.requestPermission();say("cm",p==="granted"?"Notifications activées : vous serez prévenu à l'ouverture de l'application.":"Notifications refusées.",p==="granted"?"ok":"ko");if(p==="granted")pushDue()};
+$("cd").onchange=()=>{wr(K("ad"),+$("cd").value);alerts()};
+/* navigation */
+function go(p){document.querySelectorAll("main>section").forEach(s=>s.classList.toggle("on",s.id==="p-"+p));document.querySelectorAll("#nv button").forEach(b=>b.classList.toggle("on",b.dataset.p===p));
+ if(p==="h")home();if(p==="s")suivi();if(p==="n"){alerts();if(promo==null)loadPromo()}scrollTo(0,0)}
+$("nv").onclick=e=>{const b=e.target.closest("button[data-p]");if(b)go(b.dataset.p)};
+function boot(){$("au").hidden=true;$("ap").hidden=false;DB=rd(K("db"),{});const nm=LS.getItem("rp_n_"+EM)||EM.split("@")[0];$("hn").textContent=nm;$("cn").textContent=nm;$("ce").textContent=EM;
+ $("hd").textContent=new Date().toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"});const vc=rd(K("vc"),null);if(vc)$("vu").value=vc.u;$("cd").value=String(rd(K("ad"),3));
+ go("h");alerts();pushDue()}
+(async()=>{if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
+ const c=await A({action:"config"});if(c.ok&&c.d.invite)$("iv").hidden=false;
+ if(TK&&EM){const v=await A({action:"verify",token:TK});if(v.ok||v.d.message==="Connexion internet indisponible."){boot();return}}
+ $("au").hidden=false;sc("s-w")})();
+</script></body></html>

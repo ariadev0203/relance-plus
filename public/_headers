@@ -1,0 +1,12 @@
+/sw.js
+  Cache-Control: no-cache
+/manifest.webmanifest
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache
+/
+  Cache-Control: no-cache
+/convertisseur.html
+  Cache-Control: no-cache
+/veo-module.js
+  Cache-Control: no-cache
