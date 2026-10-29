@@ -7,6 +7,6 @@ Application PWA (Netlify) : recherche Veo Pro, sauvegarde des clients, alertes p
 3. Facultatif : variable RELANCE_INVITE (Site configuration > Environment variables) pour exiger un code d'invitation à l'inscription.
 4. Le premier compte créé devient administrateur.
 
-## Première utilisation
-Créer un compte (clé Google Authenticator + codes de secours) > Compte > renseigner l'identifiant Veo Pro > Accueil.
+## Première utilisation (sans Authenticator pour le moment)
+Créer un compte (e-mail + mot de passe ; notez les codes de secours remis à l inscription) > Compte > renseigner l'identifiant Veo Pro > Accueil.
 Les clients enregistrés sont conservés sur l'appareil (pas de synchronisation entre appareils).
