@@ -48,6 +48,9 @@ nav button{flex:1;background:none;border:0;padding:9px 0 8px;color:var(--mute);f
 nav button.on{color:var(--or)}nav svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 nav i{position:absolute;top:4px;left:calc(50% + 6px);background:var(--red);color:#fff;border-radius:99px;font-style:normal;font-size:11px;min-width:18px;padding:1px 5px}
 dialog{border:0;border-radius:22px;padding:18px;width:min(92vw,440px);max-height:90vh}dialog::backdrop{background:#071d4d99}
+.rs{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;margin:10px 0;cursor:pointer}.rs>b{display:block;font-size:17px;margin-bottom:6px;text-transform:uppercase}.rs .df s{text-decoration:none}
+.ab{background:linear-gradient(135deg,#009688,#00796b);color:#fff;border-radius:22px;padding:18px;box-shadow:0 8px 20px #00796b44}.ab .r1{display:flex;justify-content:space-between;gap:10px;font-size:19px}.ab .r2{display:flex;justify-content:space-between;align-items:flex-end;margin:14px 0;font-size:14px;text-align:right}
+.ab .bd{background:#ffffff33;border-radius:10px;padding:8px 12px;font-weight:800;font-size:16px}.ab .stt{background:#00000030;border-radius:10px;padding:10px 12px}
 </style></head>
 <body>
 <!-- ================= CONNEXION ================= -->
@@ -62,7 +65,6 @@ dialog{border:0;border-radius:22px;padding:18px;width:min(92vw,440px);max-height
  <section class="scr" id="s-l"><h2>Connexion</h2>
   <label for="le">Adresse e-mail</label><input id="le" type="email" autocomplete="username" autocapitalize="off">
   <label for="lp">Mot de passe</label><input id="lp" type="password" autocomplete="current-password">
-  <label for="lc">Code Google Authenticator (ou code de secours)</label><input id="lc" inputmode="numeric" autocomplete="one-time-code" placeholder="6 chiffres">
   <label style="display:flex;gap:8px;align-items:center;margin:2px 0 8px"><input id="lr" type="checkbox" style="width:auto;margin:0" checked> Rester connecté (30 jours)</label>
   <button class="btn" id="lgo">Se connecter</button><div class="msg" id="lm" role="status"></div>
   <button class="lk" data-s="s-f">Mot de passe oublié ?</button><button class="lk" data-s="s-w">Retour</button></section>
@@ -72,17 +74,12 @@ dialog{border:0;border-radius:22px;padding:18px;width:min(92vw,440px);max-height
   <label for="ip">Mot de passe (8 caractères, lettre + chiffre)</label><input id="ip" type="password" autocomplete="new-password">
   <div id="iv" hidden><label for="ik">Code d'invitation</label><input id="ik" autocomplete="off"></div>
   <button class="btn" id="igo">Continuer</button><div class="msg" id="im" role="status"></div><button class="lk" data-s="s-w">Retour</button></section>
- <section class="scr" id="s-a"><h2>Activer la sécurité</h2>
-  <p class="msg">Dans Google Authenticator (ou une appli équivalente), ajoutez un compte avec cette clé :</p>
-  <div class="cd" id="as"></div><a id="ao" href="#">Ouvrir dans l'application d'authentification</a>
-  <label for="ac">Code à 6 chiffres affiché</label><input id="ac" inputmode="numeric" autocomplete="one-time-code">
-  <button class="btn" id="ago">Activer mon compte</button><div class="msg" id="am" role="status"></div></section>
  <section class="scr" id="s-c"><h2>Codes de secours</h2>
-  <p class="msg">Notez-les : chacun sert une seule fois si vous perdez votre téléphone ou votre mot de passe.</p>
+  <p class="msg">Notez-les dans un endroit sûr : si vous oubliez votre mot de passe, un de ces codes vous permet d'en choisir un nouveau (chaque code ne sert qu'une fois).</p>
   <div class="cd" id="cs"></div><div class="sp"></div><button class="btn" id="cgo">J'ai noté mes codes</button></section>
  <section class="scr" id="s-f"><h2>Mot de passe oublié</h2>
   <label for="fe">Adresse e-mail</label><input id="fe" type="email" autocapitalize="off">
-  <label for="fc">Code Google Authenticator ou code de secours</label><input id="fc" autocomplete="one-time-code">
+  <label for="fc">Code de secours (10 caractères)</label><input id="fc" autocomplete="one-time-code">
   <label for="fp">Nouveau mot de passe</label><input id="fp" type="password" autocomplete="new-password">
   <button class="btn" id="fgo">Changer le mot de passe</button><div class="msg" id="fm" role="status"></div><button class="lk" data-s="s-l">Retour</button></section>
 </div>
@@ -93,9 +90,10 @@ dialog{border:0;border-radius:22px;padding:18px;width:min(92vw,440px);max-height
  <main>
   <section id="p-h" class="on">
    <h2 class="o">Rechercher un abonné</h2>
-   <div class="card"><div class="tabs" id="st"><button data-k="d" class="on">Décodeur</button><button data-k="t">Mobile</button><button data-k="n">Nom</button><button data-k="a">N° abo.</button></div>
-    <input id="sq" inputmode="search" autocomplete="off" placeholder="Saisir le numéro de décodeur ici"><button class="btn dk" id="sgo">Rechercher</button><div class="msg" id="sm" role="status"></div><div id="sr"></div></div>
-   <h2 class="o">Relances à effectuer</h2><div class="msg" style="margin:-6px 4px 6px">Échéances dans les 5 prochains jours</div>
+   <div class="card"><p class="msg" style="margin:12px 0 8px">Rechercher un décodeur à partir d'un numéro de décodeur, d'une adresse e-mail, d'un numéro de téléphone ou d'un numéro d'abonné Canal+</p>
+    <div style="position:relative"><svg viewBox="0 0 24 24" width="22" height="22" style="position:absolute;left:14px;top:17px;fill:none;stroke:#8a94a8;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg><input id="sq" inputmode="search" autocomplete="off" autocapitalize="off" placeholder="Rechercher un décodeur" style="padding-left:46px"></div>
+    <button class="btn dk" id="sgo">Rechercher</button><div class="msg" id="sm" role="status"></div><div id="sr"></div></div>
+      <h2 class="o">Relances à effectuer</h2><div class="msg" style="margin:-6px 4px 6px">Échéances dans les 5 prochains jours</div>
    <div class="card" id="hl"></div><button class="lk" id="hm" style="display:block;margin:0 0 6px auto;background:none;border:0;color:var(--or);font-weight:700">Voir plus &gt;</button>
    <div class="card"><details><summary>Indicateurs de suivi <em>Voir les indicateurs ⌄</em></summary><div class="kp" id="kp"></div></details></div>
   </section>
@@ -148,18 +146,15 @@ async function A(b){try{const r=await fetch("/.netlify/functions/relance-auth",{
 const sc=id=>document.querySelectorAll("#au .scr").forEach(s=>s.classList.toggle("on",s.id===id));
 document.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>sc(b.dataset.s));
 function enter(tk,em,nm){TK=tk;EM=em;LS.setItem("rp_t",tk);LS.setItem("rp_e",em);if(nm)LS.setItem("rp_n_"+em,nm);boot()}
-$("lgo").onclick=async()=>{say("lm","Connexion…");const r=await A({action:"login",email:$("le").value,password:$("lp").value,code:$("lc").value,remember:$("lr").checked});
- if(r.ok&&r.d.token){$("lp").value=$("lc").value="";enter(r.d.token,$("le").value.trim().toLowerCase())}else say("lm",r.d.message||"Connexion refusée.","ko")};
+$("lgo").onclick=async()=>{say("lm","Connexion…");const r=await A({action:"login",email:$("le").value,password:$("lp").value,remember:$("lr").checked});
+ if(r.ok&&r.d.token){$("lp").value="";enter(r.d.token,$("le").value.trim().toLowerCase())}else say("lm",r.d.message||"Connexion refusée.","ko")};
 let reg={};
 $("igo").onclick=async()=>{say("im","Création…");reg={email:$("ie").value.trim().toLowerCase(),password:$("ip").value,name:$("in").value.trim(),invite:$("ik").value};
  const r=await A({action:"register",...reg});if(!r.ok){say("im",r.d.message||"Inscription impossible.","ko");return}
- $("as").textContent=r.d.secret;$("ao").href=r.d.otpauth;say("im","");sc("s-a")};
-$("ago").onclick=async()=>{say("am","Vérification…");const r=await A({action:"confirm",email:reg.email,password:reg.password,code:$("ac").value,remember:true});
- if(!r.ok||!r.d.token){say("am",r.d.message||"Code incorrect.","ko");return}
- reg.tk=r.d.token;$("cs").innerHTML=(r.d.recovery||[]).map(E).join("<br>");sc("s-c")};
-$("cgo").onclick=()=>enter(reg.tk,reg.email,reg.name);
+ reg.tk=r.d.token;say("im","");$("cs").innerHTML=(r.d.recovery||[]).map(E).join("<br>");sc("s-c")};
+$("cgo").onclick=()=>{if(reg.tk)enter(reg.tk,reg.email,reg.name);else sc("s-l")};
 $("fgo").onclick=async()=>{say("fm","Envoi…");const r=await A({action:"reset",email:$("fe").value,code:$("fc").value,newPassword:$("fp").value});
- if(r.ok){say("fm","");sc("s-l");$("le").value=$("fe").value;say("lm","Mot de passe changé. Connectez-vous.","ok")}else say("fm",r.d.message||"Impossible de changer le mot de passe.","ko")};
+ if(r.ok){say("fm","");reg={};$("le").value=$("fe").value;$("cs").innerHTML=(r.d.recovery||[]).map(E).join("<br>");sc("s-c")}else say("fm",r.d.message||"Impossible de changer le mot de passe.","ko")};
 $("out").onclick=()=>{["rp_t","rp_e"].forEach(k=>LS.removeItem(k));TK=EM="";location.reload()};
 /* ---- Veo Pro ---- */
 async function veo(path,method,body){const go=()=>fetch("/.netlify/functions/veo",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({path,method:method||"GET",body,token:VT})});
@@ -168,7 +163,7 @@ async function veo(path,method,body){const go=()=>fetch("/.netlify/functions/veo
  if(!r.ok)throw new Error(path==="/auth/login"?(d.message||"Identifiants Veo Pro incorrects."):r.status===401?"Veo Pro non connecté : renseignez-le dans Compte.":(d.message||"Erreur "+r.status));return d}
 async function vlogin(u,p){const d=await veo("/auth/login","POST",{username:u,password:p});VT=d.token;LS.setItem("rp_vt",VT)}
 async function vinfo(dec){const j=await veo("/cga-subs/init/v2","POST",{decoder_number:String(dec)}),sb=j.subscriber||{},c=sb.customer||{};
- return{d:String(dec),n:((c.first_name||"")+" "+(c.last_name||"")).trim()||"Client",a:fnd(sb,"subscriber_number")[0]||"",o:String(sb.option||""),f:iso(pdate(sb.subscription_date&&sb.subscription_date.end))}}
+ return{d:String(dec),n:((c.first_name||"")+" "+(c.last_name||"")).trim()||"Client",a:fnd(sb,"subscriber_number")[0]||"",o:String(sb.option||""),f:iso(pdate(sb.subscription_date&&sb.subscription_date.end)),s:iso(pdate(sb.subscription_date&&(sb.subscription_date.start||sb.subscription_date.begin||sb.subscription_date.from))),l:fnd(sb,"city")[0]||fnd(sb,"location")[0]||""}}
 $("vg").onclick=async()=>{const u=$("vu").value.trim(),p=$("vp").value;if(!u||!p){say("vm","Saisissez l'identifiant et le mot de passe.","ko");return}
  say("vm","Test en cours…");try{await vlogin(u,p);wr(K("vc"),{u,p});say("vm","Connexion réussie. Compte enregistré sur cet appareil.","ok")}catch(e){say("vm",e.message,"ko")}};
 /* ---- base clients (sauvegarde) ---- */
@@ -192,19 +187,23 @@ let cur="";function fiche(d){const c=DB[d];if(!c)return;cur=d;$("ft").textConten
 $("fsv").onclick=()=>{const c=DB[cur];if(!okT($("ft2").value)){say("fe2","Téléphone obligatoire : 9 chiffres commençant par 6.","ko");return}
  c.n=$("fn").value.trim()||c.n;c.t=n9($("ft2").value);c.r=$("fr").value;c.m=$("fo").value;c.v=$("fv").checked;save();$("fi").close();home();suivi();alerts()};
 $("fdl").onclick=()=>{if(confirm("Supprimer ce client de votre sauvegarde ?")){delete DB[cur];save();$("fi").close();home();suivi();alerts()}};$("fcl").onclick=()=>$("fi").close();
-/* recherche */
-const PH={d:"Saisir le numéro de décodeur ici",t:"Saisir le numéro de mobile",n:"Saisir le nom du client",a:"Saisir le numéro d'abonné"};
-$("st").onclick=e=>{const b=e.target.closest("button[data-k]");if(!b)return;tab=b.dataset.k;$("st").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));$("sq").placeholder=PH[tab];$("sq").inputMode=tab==="n"?"text":"numeric";say("sm","");$("sr").innerHTML=""};
+/* recherche Veo Pro : décodeur, e-mail, téléphone ou n° d'abonné -> liste -> sélection -> fiche */
+let RES=[];
+const norm=x=>{const c=x.customer||{};return{d:String(x.decoder_number||x.numdecabo||x.material_number||fnd(x,"decoder_number")[0]||""),a:String(x.subscriber_number||x.numabo||fnd(x,"subscriber_number")[0]||""),n:String(x.name||x.customer_name||((c.first_name||x.first_name||"")+" "+(c.last_name||x.last_name||""))).trim(),fm:String(x.option||x.formula||x.formule||x.pack_label||""),l:String(x.location||x.localisation||x.city||fnd(x,"city")[0]||"")}};
+async function vsearch(v){const j=await veo("/cga-subs/init/v2","POST",{decoder_number:v}),L=Array.isArray(j.subscribers)?j.subscribers:Array.isArray(j.data)?j.data:Array.isArray(j.results)?j.results:null;
+ if(L)return L.map(x=>norm(x.subscriber||x));if(!j.subscriber)return[];const r=norm(j.subscriber);r.d=r.d||String(v);return[r]}
 async function search(){const v=$("sq").value.trim(),box=$("sr");box.innerHTML="";if(!v){say("sm","Saisissez une valeur.","ko");return}
- if(tab!=="d"){const q=v.toLowerCase(),L=list().filter(c=>tab==="t"?n9(c.t).includes(n9(v)):tab==="n"?c.n.toLowerCase().includes(q):String(c.a).includes(v));
-  say("sm",L.length?L.length+" client(s) dans votre sauvegarde.":"Aucun client enregistré. Cherchez par n° de décodeur pour interroger Veo Pro.");box.innerHTML=L.map(rowH).join("");return}
- if(!/^\d{8,}$/.test(v)){say("sm","Numéro de décodeur : chiffres uniquement.","ko");return}
- say("sm","Recherche chez Veo Pro…");try{const x=await vinfo(v);pend=x;const s=DB[x.d];say("sm","");
-  box.innerHTML=`<div class="df"><b>${E(x.n)}</b><span>${fr(x.f)}</span></div><div class="msg">Décodeur ${E(x.d)}${x.a?" • abonné "+E(x.a):""}${x.o?" • "+E(x.o):""}</div>`+
-  (s?`<button class="btn lt" id="sv">Voir la fiche enregistrée</button>`:`<label for="stt">Téléphone du client (obligatoire pour enregistrer)</label><input id="stt" type="tel" inputmode="tel" placeholder="6XXXXXXXX"><button class="btn" id="sv">Enregistrer le client</button>`);
-  $("sv").onclick=()=>{if(s){fiche(x.d);return}if(!okT($("stt").value)){say("sm","Téléphone obligatoire : 9 chiffres commençant par 6 (Veo Pro ne le fournit pas).","ko");return}
-   DB[x.d]={...x,t:n9($("stt").value),v:false,r:"",m:"",u:Date.now()};save();say("sm","Client enregistré.","ok");box.innerHTML="";$("sq").value="";home();suivi();alerts()}}
+ say("sm","Recherche chez Veo Pro…");try{RES=(await vsearch(v)).filter(r=>r.d);
+  if(!RES.length){say("sm","Aucun abonné trouvé.");return}say("sm","");
+  box.innerHTML='<h3 style="margin:16px 2px 4px">Sélectionner le décodeur</h3>'+RES.map((r,i)=>`<div class="rs" data-i="${i}"><b>${E(r.n||"Abonné")}</b><div class="df"><s>Numéro décodeur :</s><span>${E(r.d)}</span></div><div class="df"><s>Numéro abonné :</s><span>${E(r.a||"—")}</span></div><div class="df"><s>Formule :</s><span>${E(r.fm||"—")}</span></div><div class="df"><s>Localisation :</s><span>${E(r.l||"—")}</span></div></div>`).join("")}
  catch(e){say("sm",e.message,"ko")}}
+$("sr").onclick=async e=>{const c=e.target.closest(".rs");if(!c)return;const r=RES[+c.dataset.i];say("sm","Chargement de la fiche…");
+ try{const x=await vinfo(r.d);say("sm","");detail({...x,n:r.n||x.n,a:r.a||x.a,o:r.fm||x.o,l:r.l||x.l})}catch(er){say("sm",er.message,"ko")}};
+function detail(x){const n=dl(x.f),st=n==null?"Échéance inconnue":n<0?"Abonnement échu depuis "+(-n)+" jour"+(n<-1?"s":""):n===0?"L'abonnement expire aujourd'hui":"Abonnement actif : expire dans "+n+" jour"+(n>1?"s":""),s=DB[x.d];
+ $("sr").innerHTML=`<h3 style="margin:16px 2px 8px">Infos sur l'abonné</h3><div class="ab"><div class="r1"><b>${E(x.n)}</b><b>${E(x.a)}</b></div><div>${E(x.d)}</div><div class="r2"><span class="bd">${E(x.o||"—")}</span><span>${x.s?"Début : "+E(x.s)+"<br>":""}Expire le : ${E(x.f||"—")}</span></div><div class="stt">${E(st)}</div></div>`+
+ (s?`<button class="btn lt" id="sv" style="margin-top:12px">Voir la fiche enregistrée</button>`:`<label for="stt" style="display:block;margin-top:12px">Téléphone du client (obligatoire pour enregistrer)</label><input id="stt" type="tel" inputmode="tel" placeholder="6XXXXXXXX"><button class="btn" id="sv">Enregistrer le client</button>`);
+ $("sv").onclick=()=>{if(s){fiche(x.d);return}if(!okT($("stt").value)){say("sm","Téléphone obligatoire : 9 chiffres commençant par 6 (Veo Pro ne le fournit pas).","ko");return}
+  DB[x.d]={d:x.d,n:x.n,a:x.a,o:x.o,f:x.f,s:x.s||"",l:x.l||"",t:n9($("stt").value),v:false,r:"",m:"",u:Date.now()};save();say("sm","Client enregistré.","ok");$("sr").innerHTML="";$("sq").value="";home();suivi();alerts()}}
 $("sgo").onclick=search;$("sq").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();search()}};
 /* relance : comparaison avec Veo Pro */
 let stop=false,run=false;
