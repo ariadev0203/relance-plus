@@ -54,54 +54,39 @@ exports.handler = async (event) => {
 
   if (!okEmail(email)) return J(400, { message: "Adresse e-mail invalide." });
 
+  const newCodes = () => Array.from({ length: 8 }, () => crypto.randomBytes(5).toString("hex").toUpperCase());
   if (q.action === "register") {
     if (!okPw(q.password)) return J(400, { message: "Mot de passe : 8 caractères minimum, avec au moins une lettre et un chiffre." });
     if (process.env.RELANCE_INVITE && !safeEq(q.invite || "", process.env.RELANCE_INVITE)) return J(403, { message: "Code d’invitation incorrect." });
     const old = await st.get(uk, { type: "json" });
     if (old && old.status === "active") return J(409, { message: "Un compte existe déjà avec cette adresse. Connectez-vous." });
-    const first = !(await st.get("meta/first", { type: "json" })), secret = b32enc(crypto.randomBytes(20)), salt = crypto.randomBytes(16).toString("hex");
-    await st.setJSON(uk, { email, name: String(q.name || "").slice(0, 80), salt, hash: hashPw(q.password, salt), totp: enc(key, secret), status: "pending", lastStep: 0, recovery: [], created: Date.now(), role: first ? "admin" : "user" });
-    return J(200, { secret, otpauth: otpauth(email, secret) });
+    const first = !(await st.get("meta/first", { type: "json" })), salt = crypto.randomBytes(16).toString("hex"), codes = newCodes();
+    const u = { email, name: String(q.name || "").slice(0, 80), salt, hash: hashPw(q.password, salt), status: "active", recovery: codes.map((c) => sha(c)), created: Date.now(), role: first ? "admin" : "user" };
+    await st.setJSON(uk, u);
+    if (first) await st.setJSON("meta/first", { email, at: Date.now() });
+    return J(200, { ...session(key, u, true), recovery: codes });
   }
 
   const u = await st.get(uk, { type: "json" }), lk = sha(email), l = await lockState(st, lk);
   if (l.until && l.until > Date.now()) return J(429, { message: "Trop de tentatives. Réessayez dans quelques minutes." });
-  const pwOk = u && safeEq(hashPw(String(q.password || ""), u.salt), u.hash);
-  const code = String(q.code || "").replace(/\s/g, "");
-
-  if (q.action === "reset") {
-    // Mot de passe oublié : exige le code Authenticator (ou un code de secours) puis fixe le nouveau mot de passe.
-    if (!u || u.status !== "active") { await fail(st, lk); return J(401, { message: GENERIC }); }
-    if (!okPw(q.newPassword)) return J(400, { message: "Mot de passe : 8 caractères minimum, avec au moins une lettre et un chiffre." });
-    const dg = code.replace(/\D/g, ""); let good = false;
-    if (/^\d{6}$/.test(dg)) { const step = totpStep(dec(key, u.totp), dg, u.lastStep); if (step) { u.lastStep = step; good = true; } }
-    else if (/^[0-9A-Fa-f]{10}$/.test(code)) { const h = sha(code.toUpperCase()), i = (u.recovery || []).indexOf(h); if (i >= 0) { u.recovery.splice(i, 1); good = true; } }
-    if (!good) { await fail(st, lk); return J(401, { message: GENERIC }); }
-    u.salt = crypto.randomBytes(16).toString("hex"); u.hash = hashPw(q.newPassword, u.salt);
-    await st.setJSON(uk, u); await clearLock(st, lk);
-    return J(200, { ok: true });
-  }
-
-  if (q.action === "confirm") {
-    if (!u || u.status !== "pending" || !pwOk) { await fail(st, lk); return J(400, { message: "Inscription introuvable ou déjà activée." }); }
-    const step = totpStep(dec(key, u.totp), code.replace(/\D/g, ""), 0);
-    if (!step) { await fail(st, lk); return J(400, { message: "Code incorrect. Vérifiez l’heure de votre téléphone et réessayez." }); }
-    const codes = Array.from({ length: 8 }, () => crypto.randomBytes(5).toString("hex").toUpperCase());
-    u.status = "active"; u.lastStep = step; u.recovery = codes.map((c) => sha(c)); await st.setJSON(uk, u);
-    if (u.role === "admin") await st.setJSON("meta/first", { email, at: Date.now() });
-    await clearLock(st, lk);
-    return J(200, { ...session(key, u, !!q.remember), recovery: codes });
-  }
 
   if (q.action === "login") {
-    if (!u || u.status !== "active" || !pwOk) { await fail(st, lk); return J(401, { message: GENERIC }); }
-    const digits = code.replace(/\D/g, "");
-    let good = false;
-    if (/^\d{6}$/.test(digits)) { const step = totpStep(dec(key, u.totp), digits, u.lastStep); if (step) { u.lastStep = step; good = true; } }
-    else if (/^[0-9A-Fa-f]{10}$/.test(code)) { const h = sha(code.toUpperCase()), i = (u.recovery || []).indexOf(h); if (i >= 0) { u.recovery.splice(i, 1); good = true; } }
-    if (!good) { await fail(st, lk); return J(401, { message: GENERIC }); }
-    await st.setJSON(uk, u); await clearLock(st, lk);
+    const pwOk = u && u.status === "active" && safeEq(hashPw(String(q.password || ""), u.salt), u.hash);
+    if (!pwOk) { await fail(st, lk); return J(401, { message: GENERIC }); }
+    await clearLock(st, lk);
     return J(200, { ...session(key, u, !!q.remember), recoveryLeft: (u.recovery || []).length });
+  }
+
+  if (q.action === "reset") {
+    // Mot de passe oublié : un code de secours (usage unique) autorise le nouveau mot de passe ; de nouveaux codes sont remis.
+    if (!u || u.status !== "active") { await fail(st, lk); return J(401, { message: GENERIC }); }
+    if (!okPw(q.newPassword)) return J(400, { message: "Mot de passe : 8 caractères minimum, avec au moins une lettre et un chiffre." });
+    const code = String(q.code || "").replace(/\s/g, ""), i = /^[0-9A-Fa-f]{10}$/.test(code) ? (u.recovery || []).indexOf(sha(code.toUpperCase())) : -1;
+    if (i < 0) { await fail(st, lk); return J(401, { message: GENERIC }); }
+    const codes = newCodes();
+    u.salt = crypto.randomBytes(16).toString("hex"); u.hash = hashPw(q.newPassword, u.salt); u.recovery = codes.map((c) => sha(c));
+    await st.setJSON(uk, u); await clearLock(st, lk);
+    return J(200, { ok: true, recovery: codes });
   }
   return J(400, { message: "Action inconnue." });
 };
