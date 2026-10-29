@@ -51,6 +51,7 @@ dialog{border:0;border-radius:22px;padding:18px;width:min(92vw,440px);max-height
 .rs{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;margin:10px 0;cursor:pointer}.rs>b{display:block;font-size:17px;margin-bottom:6px;text-transform:uppercase}.rs .df s{text-decoration:none}
 .ab{background:linear-gradient(135deg,#009688,#00796b);color:#fff;border-radius:22px;padding:18px;box-shadow:0 8px 20px #00796b44}.ab .r1{display:flex;justify-content:space-between;gap:10px;font-size:19px}.ab .r2{display:flex;justify-content:space-between;align-items:flex-end;margin:14px 0;font-size:14px;text-align:right}
 .ab .bd{background:#ffffff33;border-radius:10px;padding:8px 12px;font-weight:800;font-size:16px}.ab .stt{background:#00000030;border-radius:10px;padding:10px 12px}
+.bm{background:var(--or);color:#fff;border:0;border-radius:12px;padding:9px 13px;font-weight:700;white-space:nowrap}.row .d .pill.bgx{background:#8a94a8}textarea{resize:vertical}
 </style></head>
 <body>
 <!-- ================= CONNEXION ================= -->
@@ -93,7 +94,7 @@ dialog{border:0;border-radius:22px;padding:18px;width:min(92vw,440px);max-height
    <div class="card"><p class="msg" style="margin:12px 0 8px">Rechercher un décodeur à partir d'un numéro de décodeur, d'une adresse e-mail, d'un numéro de téléphone ou d'un numéro d'abonné Canal+</p>
     <div style="position:relative"><svg viewBox="0 0 24 24" width="22" height="22" style="position:absolute;left:14px;top:17px;fill:none;stroke:#8a94a8;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg><input id="sq" inputmode="search" autocomplete="off" autocapitalize="off" placeholder="Rechercher un décodeur" style="padding-left:46px"></div>
     <button class="btn dk" id="sgo">Rechercher</button><div class="msg" id="sm" role="status"></div><div id="sr"></div></div>
-      <h2 class="o">Relances à effectuer</h2><div class="msg" style="margin:-6px 4px 6px">Échéances dans les 5 prochains jours</div>
+      <h2 class="o">Relances à effectuer</h2><div class="msg" style="margin:-6px 4px 6px" id="hj"></div>
    <div class="card" id="hl"></div><button class="lk" id="hm" style="display:block;margin:0 0 6px auto;background:none;border:0;color:var(--or);font-weight:700">Voir plus &gt;</button>
    <div class="card"><details><summary>Indicateurs de suivi <em>Voir les indicateurs ⌄</em></summary><div class="kp" id="kp"></div></details></div>
   </section>
@@ -101,16 +102,25 @@ dialog{border:0;border-radius:22px;padding:18px;width:min(92vw,440px);max-height
    <div class="chips" id="sf"><button data-f="all" class="on">Tous</button><button data-f="fav">Favoris</button><button data-f="rel">À relancer</button><button data-f="rap">Rappels</button></div>
    <div class="card" id="sl"></div></section>
   <section id="p-r"><h2 class="o">Relance</h2>
+   <div class="card" id="rq"></div>
+   <h2 class="o" style="font-size:19px">Comparer avec Veo Pro</h2>
    <div class="card"><p class="msg">Compare vos clients enregistrés avec la base Veo Pro et signale les différences. Vous validez chaque mise à jour.</p>
     <button class="btn dk" id="rgo">Lancer la comparaison</button><div class="msg" id="rm" role="status"></div></div><div id="rl"></div></section>
   <section id="p-n"><h2 class="o">Alertes</h2><div id="nl"></div></section>
-  <section id="p-c"><h2 class="o">Compte</h2>
+  <section id="p-c"><h2 class="o">Paramètres</h2>
    <div class="card"><p><b id="cn"></b><br><span class="msg" id="ce"></span></p></div>
+   <div class="card"><h3 style="margin:10px 0 0">Message de relance</h3><p class="msg">Ce modèle est proposé à chaque relance, et vous pouvez toujours le modifier avant l'envoi.</p>
+    <label for="sck">Canal par défaut</label><select id="sck"><option value="wa">WhatsApp</option><option value="sms">SMS</option></select>
+    <label for="sci">Indicatif du pays</label><input id="sci" inputmode="numeric" autocomplete="off">
+    <label for="scs">Signature</label><input id="scs" autocomplete="off">
+    <label for="scm">Modèle du message</label><textarea id="scm" rows="8"></textarea>
+    <div class="msg">Variables : {salut} {civilite} {nom} {decodeur} {lieu} {expire} {moment} {signature} {formule} {fin} {abonne}</div>
+    <button class="btn dk" id="scv">Enregistrer les paramètres</button><div style="height:8px"></div><button class="btn lt" id="scr">Rétablir le modèle par défaut</button><div class="msg" id="scx" role="status"></div></div>
    <div class="card"><h3 style="margin:10px 0 0">Compte Veo Pro</h3><p class="msg">Moteur de recherche et promotions. Enregistré uniquement sur cet appareil.</p>
     <label for="vu">Identifiant Veo Pro</label><input id="vu" autocomplete="off" autocapitalize="off"><label for="vp">Mot de passe Veo Pro</label><input id="vp" type="password" autocomplete="off">
     <button class="btn dk" id="vg">Tester et enregistrer</button><div class="msg" id="vm" role="status"></div></div>
-   <div class="card"><h3 style="margin:10px 0 0">Notifications avant échéance</h3>
-    <label for="cd">Prévenir</label><select id="cd"><option value="1">1 jour avant</option><option value="2">2 jours avant</option><option value="3">3 jours avant</option><option value="5">5 jours avant</option><option value="7">7 jours avant</option></select>
+   <div class="card"><h3 style="margin:10px 0 0">Délai et notifications</h3>
+    <label for="cd">Relancer et prévenir</label><select id="cd"><option value="1">1 jour avant l'échéance</option><option value="2">2 jours avant</option><option value="3">3 jours avant</option><option value="5">5 jours avant</option><option value="7">7 jours avant</option></select>
     <button class="btn lt" id="cnb">Activer les notifications du téléphone</button><div class="msg" id="cm">Les alertes s'affichent à l'ouverture de l'application.</div></div>
    <button class="btn lt" id="out">Se déconnecter</button></section>
  </main>
@@ -119,22 +129,29 @@ dialog{border:0;border-radius:22px;padding:18px;width:min(92vw,440px);max-height
   <button data-p="s"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5c2 .7 3.5 2.4 3.5 5.5"/></svg>Suivi</button>
   <button data-p="r"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg>Relance</button>
   <button data-p="n"><svg viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0 1 12 0v6l2 2H4zM10 21h4"/></svg>Alertes<i id="nb" hidden></i></button>
-  <button data-p="c"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>Compte</button>
+  <button data-p="c"><svg viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg>Paramètres</button>
  </nav>
 </div>
 
 <dialog id="fi"><h3 id="ft" style="margin:0 0 4px"></h3><div class="msg" id="fs"></div>
  <label for="fn">Nom</label><input id="fn"><label for="ft2">Téléphone du client (obligatoire, 9 chiffres)</label><input id="ft2" type="tel" inputmode="tel">
+ <label for="fcv">Civilité (pour le message)</label><select id="fcv"><option value="">—</option><option>M.</option><option>Mme</option><option>Mlle</option></select>
  <label for="fr">Rappel (date)</label><input id="fr" type="date"><label for="fo">Note</label><textarea id="fo" rows="2"></textarea>
  <label style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><input id="fv" type="checkbox" style="width:auto;margin:0"> Client favori</label>
+ <button class="btn dk" id="frl" style="margin-bottom:8px">Relancer ce client</button>
  <button class="btn" id="fsv">Enregistrer</button><div class="msg ko" id="fe2"></div>
  <div style="display:flex;gap:10px;margin-top:8px"><button class="btn lt" id="fdl">Supprimer</button><button class="btn lt" id="fcl">Fermer</button></div></dialog>
 
+<dialog id="rd"><h3 id="rdt" style="margin:0 0 4px"></h3><div class="msg" id="rds"></div>
+ <div class="chips" id="rdk"><button data-k="wa" class="on">WhatsApp</button><button data-k="sms">SMS</button></div>
+ <label for="rtx">Message (modifiable avant l'envoi)</label><textarea id="rtx" rows="9"></textarea>
+ <button class="btn lt" id="rrs" style="margin-bottom:8px">Rétablir le modèle</button><button class="btn" id="rsd">Envoyer</button><div class="msg" id="rme" role="status"></div>
+ <div style="display:flex;gap:10px;margin-top:8px"><a class="btn lt" id="rtel" style="text-align:center;text-decoration:none">Appeler</a><button class="btn lt" id="rcl">Fermer</button></div></dialog>
 <script>
 const $=i=>document.getElementById(i),E=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])),LS=localStorage;
 const rd=(k,d)=>{try{const v=JSON.parse(LS.getItem(k));return v==null?d:v}catch(e){return d}},wr=(k,v)=>{try{LS.setItem(k,JSON.stringify(v))}catch(e){}};
 let TK=LS.getItem("rp_t")||"",EM=LS.getItem("rp_e")||"",VT=LS.getItem("rp_vt")||"",DB={},tab="d",filt="all",pend={};
-const K=k=>"rp_"+EM+"_"+k,n9=v=>String(v||"").replace(/\D/g,"").replace(/^237/,"").slice(-9),okT=v=>/^[6]\d{8}$/.test(n9(v));
+const K=k=>"rp_"+EM+"_"+k,jours=()=>+rd(K("ad"),5),n9=v=>String(v||"").replace(/\D/g,"").replace(/^237/,"").slice(-9),okT=v=>/^[6]\d{8}$/.test(n9(v));
 const day0=()=>{const d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate())},iso=d=>d?d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"):"";
 const pdate=s=>{const m=/(\d+)\/(\d+)\/(\d+)/.exec(s||"");return m?new Date(+m[3],m[2]-1,+m[1]):null},fr=s=>s?s.split("-").reverse().join("/"):"—";
 const dl=s=>s?Math.round((new Date(s+"T00:00:00")-day0())/864e5):null;
@@ -169,13 +186,13 @@ $("vg").onclick=async()=>{const u=$("vu").value.trim(),p=$("vp").value;if(!u||!p
 /* ---- base clients (sauvegarde) ---- */
 const save=()=>wr(K("db"),DB),list=()=>Object.values(DB);
 const ini=n=>(String(n).trim().split(/\s+/).map(w=>w[0]).slice(0,2).join("")||"?").toUpperCase();
-function rowH(c){const n=dl(c.f);return`<div class="row" data-d="${E(c.d)}"><div class="av ${cl(n)}">${E(ini(c.n))}</div><div class="i"><b>${E(c.n)}</b><small>Décodeur : ${E(c.d)} • ${E(n9(c.t))}</small></div><div class="d">${lab(n)}<br><span class="pill ${cl(n)}">À relancer</span></div></div>`}
-function home(){const L=list().map(c=>({c,n:dl(c.f)})).filter(x=>x.n!=null&&x.n>=-5&&x.n<=5).sort((a,b)=>a.n-b.n);
- $("hl").innerHTML=L.slice(0,5).map(x=>rowH(x.c)).join("")||'<p class="msg">Aucune échéance dans les 5 prochains jours.</p>';$("hm").hidden=L.length<=5;
- const all=list(),due=all.filter(c=>{const n=dl(c.f);return n!=null&&n>=0&&n<=5}).length,ech=all.filter(c=>{const n=dl(c.f);return n!=null&&n<0}).length;
- $("kp").innerHTML=[[all.length,"Clients enregistrés"],[due,"À relancer (5 jours)"],[ech,"Échus"],[all.filter(c=>c.v).length,"Favoris"]].map(k=>`<div><b>${k[0]}</b><small>${k[1]}</small></div>`).join("")}
+function rowH(c){const n=dl(c.f);return`<div class="row" data-d="${E(c.d)}"><div class="av ${cl(n)}">${E(ini(c.n))}</div><div class="i"><b>${E(c.n)}</b><small>Décodeur : ${E(c.d)} • ${E(n9(c.t))}</small></div><div class="d">${lab(n)}<br><span class="pill ${c.re&&c.re===c.f?"bgx":cl(n)}">${c.re&&c.re===c.f?"Relancé":"À relancer"}</span></div></div>`}
+function home(){const L=list().map(c=>({c,n:dl(c.f)})).filter(x=>x.n!=null&&x.n>=-5&&x.n<=jours()).sort((a,b)=>a.n-b.n);
+ $("hj").textContent="Échéances dans les "+jours()+" prochains jours";$("hl").innerHTML=L.slice(0,5).map(x=>rowH(x.c)).join("")||'<p class="msg">Aucune échéance dans les 5 prochains jours.</p>';$("hm").hidden=L.length<=5;
+ const all=list(),due=all.filter(c=>{const n=dl(c.f);return n!=null&&n>=0&&n<=jours()}).length,ech=all.filter(c=>{const n=dl(c.f);return n!=null&&n<0}).length;
+ $("kp").innerHTML=[[all.length,"Clients enregistrés"],[due,"À relancer ("+jours()+" jours)"],[ech,"Échus"],[all.filter(c=>c.v).length,"Favoris"]].map(k=>`<div><b>${k[0]}</b><small>${k[1]}</small></div>`).join("")}
 function suivi(){let L=list().map(c=>({c,n:dl(c.f)}));const t=iso(day0());
- if(filt==="fav")L=L.filter(x=>x.c.v);else if(filt==="rel")L=L.filter(x=>x.n!=null&&x.n<=5);else if(filt==="rap")L=L.filter(x=>x.c.r&&x.c.r<=t);
+ if(filt==="fav")L=L.filter(x=>x.c.v);else if(filt==="rel")L=L.filter(x=>x.n!=null&&x.n<=jours());else if(filt==="rap")L=L.filter(x=>x.c.r&&x.c.r<=t);
  L.sort((a,b)=>(a.n==null)-(b.n==null)||a.n-b.n);
  $("sl").innerHTML=L.map(x=>{const c=x.c;return`<div class="row" data-d="${E(c.d)}"><div class="av ${cl(x.n)}">${E(ini(c.n))}</div><div class="i"><b>${E(c.n)}</b><small>${E(n9(c.t))} • fin ${fr(c.f)}${c.r?" • rappel "+fr(c.r):""}</small></div><button class="star${c.v?" on":""}" data-s="${E(c.d)}" aria-label="Favori">★</button></div>`}).join("")||'<p class="msg">Aucun client dans cette vue.</p>'}
 $("sf").onclick=e=>{const b=e.target.closest("button[data-f]");if(!b)return;filt=b.dataset.f;$("sf").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));suivi()};
@@ -183,10 +200,10 @@ $("sl").onclick=e=>{const s=e.target.closest("button[data-s]");if(s){const c=DB[
 $("hl").onclick=e=>{const r=e.target.closest(".row");if(r)fiche(r.dataset.d)};$("hm").onclick=()=>{filt="rel";$("sf").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x.dataset.f==="rel"));go("s")};
 /* fiche client */
 let cur="";function fiche(d){const c=DB[d];if(!c)return;cur=d;$("ft").textContent=c.n;$("fs").textContent="Décodeur "+c.d+(c.a?" • abonné "+c.a:"")+" • "+(c.o||"offre ?")+" • fin "+fr(c.f);
- $("fn").value=c.n;$("ft2").value=c.t||"";$("fr").value=c.r||"";$("fo").value=c.m||"";$("fv").checked=!!c.v;say("fe2","");$("fi").showModal()}
+ $("fn").value=c.n;$("fcv").value=c.c||"";$("ft2").value=c.t||"";$("fr").value=c.r||"";$("fo").value=c.m||"";$("fv").checked=!!c.v;say("fe2","");$("fi").showModal()}
 $("fsv").onclick=()=>{const c=DB[cur];if(!okT($("ft2").value)){say("fe2","Téléphone obligatoire : 9 chiffres commençant par 6.","ko");return}
- c.n=$("fn").value.trim()||c.n;c.t=n9($("ft2").value);c.r=$("fr").value;c.m=$("fo").value;c.v=$("fv").checked;save();$("fi").close();home();suivi();alerts()};
-$("fdl").onclick=()=>{if(confirm("Supprimer ce client de votre sauvegarde ?")){delete DB[cur];save();$("fi").close();home();suivi();alerts()}};$("fcl").onclick=()=>$("fi").close();
+ c.n=$("fn").value.trim()||c.n;c.t=n9($("ft2").value);c.r=$("fr").value;c.c=$("fcv").value;c.m=$("fo").value;c.v=$("fv").checked;save();$("fi").close();home();suivi();alerts()};
+$("fdl").onclick=()=>{if(confirm("Supprimer ce client de votre sauvegarde ?")){delete DB[cur];save();$("fi").close();home();suivi();alerts()}};$("fcl").onclick=()=>$("fi").close();$("frl").onclick=()=>{$("fi").close();openRel(cur)};
 /* recherche Veo Pro : décodeur, e-mail, téléphone ou n° d'abonné -> liste -> sélection -> fiche */
 let RES=[];
 const norm=x=>{const c=x.customer||{};return{d:String(x.decoder_number||x.numdecabo||x.material_number||fnd(x,"decoder_number")[0]||""),a:String(x.subscriber_number||x.numabo||fnd(x,"subscriber_number")[0]||""),n:String(x.name||x.customer_name||((c.first_name||x.first_name||"")+" "+(c.last_name||x.last_name||""))).trim(),fm:String(x.option||x.formula||x.formule||x.pack_label||""),l:String(x.location||x.localisation||x.city||fnd(x,"city")[0]||"")}};
@@ -217,7 +234,7 @@ $("rgo").onclick=async()=>{if(run){stop=true;return}const L=list();if(!L.length)
  run=false;$("rgo").textContent="Lancer la comparaison";if(!$("rm").classList.contains("ko"))say("rm",stop?"Comparaison arrêtée.":diff?diff+" client(s) à mettre à jour.":"Tout est à jour : aucune différence avec Veo Pro.","ok")};
 /* alertes : échéances proches, rappels, promotions Veo Pro */
 let promo=null,promoErr="";
-function due(){const N=+rd(K("ad"),3),t=iso(day0());return{ech:list().map(c=>({c,n:dl(c.f)})).filter(x=>x.n!=null&&x.n<=N&&x.n>=-30).sort((a,b)=>a.n-b.n),rap:list().filter(c=>c.r&&c.r<=t)}}
+function due(){const N=jours(),t=iso(day0());return{ech:list().map(c=>({c,n:dl(c.f)})).filter(x=>x.n!=null&&x.n<=N&&x.n>=-30).sort((a,b)=>a.n-b.n),rap:list().filter(c=>c.r&&c.r<=t)}}
 function alerts(){const D=due(),tot=D.ech.length+D.rap.length;$("nb").hidden=!tot;$("nb").textContent=tot;let h="";
  h+=`<div class="card"><h3 style="margin:12px 0 0">Échéances proches</h3>`+(D.ech.map(x=>rowH(x.c)).join("")||'<p class="msg">Aucune échéance proche.</p>')+`</div>`;
  h+=`<div class="card"><h3 style="margin:12px 0 0">Rappels du jour</h3>`+(D.rap.map(c=>`<div class="row" data-d="${E(c.d)}"><div class="i"><b>${E(c.n)}</b><small>Rappel du ${fr(c.r)}${c.m?" • "+E(c.m):""}</small></div></div>`).join("")||'<p class="msg">Aucun rappel.</p>')+`</div>`;
@@ -231,12 +248,35 @@ async function pushDue(){const D=due(),tot=D.ech.length+D.rap.length,day=iso(day
 $("cnb").onclick=async()=>{if(!("Notification"in window)){say("cm","Notifications non prises en charge ici (sur iPhone, installez d'abord l'application sur l'écran d'accueil).","ko");return}
  const p=await Notification.requestPermission();say("cm",p==="granted"?"Notifications activées : vous serez prévenu à l'ouverture de l'application.":"Notifications refusées.",p==="granted"?"ok":"ko");if(p==="granted")pushDue()};
 $("cd").onchange=()=>{wr(K("ad"),+$("cd").value);alerts()};
+/* ---- relance : message modifiable (avant l'envoi et dans Paramètres) ---- */
+const CFG0={ind:"237",canal:"wa",msg:"{salut} {civilite} {nom}, votre décodeur {decodeur}{lieu} {expire}.\n\nJe serais ravie de le réabonner pour vous si vous êtes d'accord !\n\nTout en vous souhaitant une agréable {moment}. {signature}"};
+const cfg=()=>({...CFG0,sig:LS.getItem("rp_n_"+EM)||"",...rd(K("cfg"),{})}),ph=c=>cfg().ind+n9(c.t);
+function fill(c,t){const h=new Date().getHours(),d=c.f?new Date(c.f+"T00:00:00"):null,lg=d?d.toLocaleDateString("fr-FR",{day:"numeric",month:"short",year:"numeric"}):"";
+ const v={nom:c.n,formule:c.o||"",fin:fr(c.f),abonne:c.a||"",decodeur:c.d,civilite:c.c||"",lieu:c.l?" ("+c.l+")":"",expire:d?(d<day0()?"a expiré le ":"expire le ")+lg:"",salut:h<18?"Bonjour":"Bonsoir",moment:h<18?"journée":"soirée",signature:cfg().sig};
+ return t.replace(/\{(\w+)\}/g,(x,k)=>k in v?v[k]:x).replace(/[ \t]{2,}/g," ").replace(/ +\n/g,"\n").replace(/\n{3,}/g,"\n\n").trim()}
+let rcur="",rk="wa";const chK=()=>$("rdk").querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.k===rk));
+function openRel(d){const c=DB[d];if(!c)return;rcur=d;rk=cfg().canal;const l=(c.rl||[]).slice(-1)[0];
+ $("rdt").textContent=c.n;$("rds").textContent="Décodeur "+c.d+" • fin "+fr(c.f)+" • "+n9(c.t)+(l?" • dernière relance le "+new Date(l.t).toLocaleDateString("fr-FR"):"");
+ chK();$("rtx").value=fill(c,cfg().msg);say("rme","");$("rtel").href="tel:+"+ph(c);$("rd").showModal()}
+$("rdk").onclick=e=>{const b=e.target.closest("button[data-k]");if(b){rk=b.dataset.k;chK()}};
+$("rrs").onclick=()=>{$("rtx").value=fill(DB[rcur],cfg().msg)};$("rcl").onclick=()=>$("rd").close();
+$("rsd").onclick=()=>{const c=DB[rcur],m=$("rtx").value.trim();if(!m){say("rme","Le message est vide.","ko");return}
+ const ios=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1),a=document.createElement("a");
+ a.href=rk==="wa"?"https://wa.me/"+ph(c)+"?text="+encodeURIComponent(m):"sms:+"+ph(c)+(ios?"&":"?")+"body="+encodeURIComponent(m);a.target="_blank";a.rel="noopener";document.body.appendChild(a);a.click();a.remove();
+ c.rl=(c.rl||[]).concat({t:Date.now(),k:rk}).slice(-20);c.re=c.f;save();say("rme","Message ouvert dans "+(rk==="wa"?"WhatsApp":"vos SMS")+" : envoyez-le puis revenez ici.","ok");home();suivi();alerts();relList()};
+function relList(){const L=list().map(c=>({c,n:dl(c.f)})).filter(x=>x.n!=null&&x.n<=jours()&&x.n>=-30).sort((a,b)=>a.n-b.n);
+ $("rq").innerHTML='<h3 style="margin:12px 0 0">À relancer ('+L.filter(x=>!(x.c.re&&x.c.re===x.c.f)).length+")</h3>"+(L.map(x=>{const c=x.c,done=c.re&&c.re===c.f,l=(c.rl||[]).slice(-1)[0];
+  return`<div class="row" data-d="${E(c.d)}"><div class="av ${done?"bgx":cl(x.n)}">${E(ini(c.n))}</div><div class="i"><b>${E(c.n)}</b><small>${done&&l?"Relancé le "+new Date(l.t).toLocaleDateString("fr-FR")+" ("+(l.k==="wa"?"WhatsApp":"SMS")+")":lab(x.n)+" • "+n9(c.t)}</small></div><button class="bm" data-r="${E(c.d)}">${done?"Renvoyer":"Relancer"}</button></div>`}).join("")||'<p class="msg">Aucun client à relancer pour le moment.</p>')}
+$("rq").onclick=e=>{const b=e.target.closest("button[data-r]");if(b){openRel(b.dataset.r);return}const r=e.target.closest(".row");if(r)fiche(r.dataset.d)};
+function cfgShow(){const g=cfg();$("sck").value=g.canal;$("sci").value=g.ind;$("scs").value=g.sig;$("scm").value=g.msg}
+$("scv").onclick=()=>{wr(K("cfg"),{canal:$("sck").value,ind:$("sci").value.replace(/\D/g,"")||"237",sig:$("scs").value.trim(),msg:$("scm").value.trim()||CFG0.msg});say("scx","Paramètres enregistrés.","ok")};
+$("scr").onclick=()=>{$("scm").value=CFG0.msg;say("scx","Modèle par défaut rétabli : touchez « Enregistrer les paramètres ».")};
 /* navigation */
 function go(p){document.querySelectorAll("main>section").forEach(s=>s.classList.toggle("on",s.id==="p-"+p));document.querySelectorAll("#nv button").forEach(b=>b.classList.toggle("on",b.dataset.p===p));
- if(p==="h")home();if(p==="s")suivi();if(p==="n"){alerts();if(promo==null)loadPromo()}scrollTo(0,0)}
+ if(p==="h")home();if(p==="s")suivi();if(p==="r")relList();if(p==="c")cfgShow();if(p==="n"){alerts();if(promo==null)loadPromo()}scrollTo(0,0)}
 $("nv").onclick=e=>{const b=e.target.closest("button[data-p]");if(b)go(b.dataset.p)};
 function boot(){$("au").hidden=true;$("ap").hidden=false;DB=rd(K("db"),{});const nm=LS.getItem("rp_n_"+EM)||EM.split("@")[0];$("hn").textContent=nm;$("cn").textContent=nm;$("ce").textContent=EM;
- $("hd").textContent=new Date().toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"});const vc=rd(K("vc"),null);if(vc)$("vu").value=vc.u;$("cd").value=String(rd(K("ad"),3));
+ $("hd").textContent=new Date().toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"});const vc=rd(K("vc"),null);if(vc)$("vu").value=vc.u;$("cd").value=String(jours());
  go("h");alerts();pushDue()}
 (async()=>{if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
  const c=await A({action:"config"});if(c.ok&&c.d.invite)$("iv").hidden=false;
