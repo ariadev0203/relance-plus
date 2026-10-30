@@ -3,17 +3,17 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Relance+</title>
 <link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<meta name="theme-color" content="#071d4d"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#071d4d"><script>try{document.documentElement.dataset.os=localStorage.getItem("rp_os")||"relance"}catch(e){}</script><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
 <style>
-:root{--navy:#071d4d;--navy2:#0d3a8c;--or:#f7931e;--bg:#f3f6fb;--card:#fff;--ink:#0f1f3d;--mute:#6b7792;--line:#e6ebf3;--red:#e53935;--grn:#2e9e57;--blu:#1e88c9;--yel:#e8a91c}
+:root{--navy:#071d4d;--navy2:#0d3a8c;--or:#f7931e;--bg:#f3f6fb;--card:#fff;--ink:#0f1f3d;--mute:#6b7792;--line:#e6ebf3;--red:#e53935;--grn:#2e9e57;--blu:#1e88c9;--yel:#e8a91c;--inp:#fff;--dlg:#fff;--navbg:#fff}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;height:100%}
-body{font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+body{font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
 [hidden]{display:none!important}button,input,select,textarea{font:inherit;color:inherit}
-input,select,textarea{width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:14px;background:#fff;margin:4px 0 10px}
+input,select,textarea{width:100%;padding:15px 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--inp);margin:6px 0 14px}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--or);border-color:var(--or)}
 label{font-size:13px;font-weight:600;color:var(--mute)}
 .btn{display:block;width:100%;border:0;border-radius:16px;padding:15px;font-weight:700;background:var(--or);color:#fff;cursor:pointer}
-.btn.dk{background:var(--navy)}.btn.ln{background:transparent;border:1.5px solid #ffffff66;color:#fff}.btn.lt{background:#fff;border:1.5px solid var(--line);color:var(--ink)}.btn:disabled{opacity:.5}
+.btn.dk{background:var(--navy)}.btn.ln{background:transparent;border:1.5px solid #ffffff66;color:#fff}.btn.lt{background:var(--card);border:1.5px solid var(--line);color:var(--ink)}.btn:disabled{opacity:.5}
 .msg{font-size:14px;color:var(--mute);margin:6px 2px;min-height:1px}.msg.ok{color:var(--grn)}.msg.ko{color:var(--red)}
 /* connexion */
 #au{min-height:100%;background:radial-gradient(circle at 15% 0,#1f56b8 0,transparent 45%),linear-gradient(170deg,var(--navy2),var(--navy) 70%);color:#fff;padding:calc(env(safe-area-inset-top) + 28px) 24px calc(env(safe-area-inset-bottom) + 24px);display:flex;flex-direction:column}
@@ -29,29 +29,44 @@ label{font-size:13px;font-weight:600;color:var(--mute)}
 #ap{min-height:100%;padding-bottom:calc(76px + env(safe-area-inset-bottom))}
 header{padding:calc(env(safe-area-inset-top) + 14px) 18px 6px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 header b{font-size:19px;text-transform:uppercase;letter-spacing:.3px}header span{font-size:13px;color:var(--mute)}
-main{padding:0 14px 20px}section{display:none}section.on{display:block}
-h2.o{color:var(--or);font-size:23px;margin:18px 4px 8px}
-.card{background:var(--card);border-radius:18px;box-shadow:0 2px 10px #1b2b5214;padding:6px 14px 14px;margin:8px 0}
+main{padding:0 16px 32px}section{display:none}section.on{display:block}
+h2.o{color:var(--or);font-size:24px;margin:30px 4px 12px}
+.card{background:var(--card);border-radius:18px;box-shadow:0 2px 10px #1b2b5214;padding:10px 18px 20px;margin:14px 0}
 .tabs{display:flex;border-bottom:1px solid var(--line);margin:0 -14px 12px}.tabs button{flex:1;background:none;border:0;padding:13px 2px;font-weight:700;border-bottom:3px solid transparent;color:var(--ink)}.tabs button.on{color:var(--or);border-color:var(--or)}
-.row{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line);cursor:pointer}.row:first-child{border-top:0}
+.row{display:flex;align-items:center;gap:14px;padding:16px 0;border-top:1px solid var(--line);cursor:pointer}.row:first-child{border-top:0}
 .av{flex:none;width:46px;height:46px;border-radius:50%;color:#fff;font-weight:800;display:grid;place-items:center}
-.row .i{flex:1;min-width:0}.row .i b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.row .i small{color:var(--mute);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .i{flex:1;min-width:0}.row .i b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.row .i small{margin-top:3px;color:var(--mute);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .row .d{text-align:right;font-size:13px;font-weight:700;white-space:nowrap}.pill{display:inline-block;color:#fff;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;margin-top:3px}
-.bg0{background:var(--red)}.bg1{background:var(--or)}.bg2{background:var(--yel)}.bg3{background:var(--grn)}.bg4{background:var(--blu)}.bgx{background:#8a94a8}
-.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px}.chips button{flex:none;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;font-weight:700}.chips button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.bg0{background:#e53935}.bg1{background:#f59e0b}.bg2{background:#e8a91c}.bg3{background:#2e9e57}.bg4{background:#1e88c9}.bgx{background:#8a94a8}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px}.chips button{flex:none;border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:9px 14px;font-weight:700}.chips button.on{background:var(--navy);border-color:var(--navy);color:#fff}
 .kp{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:8px}.kp div{background:var(--bg);border-radius:14px;padding:12px}.kp b{display:block;font-size:26px;color:var(--navy)}.kp small{color:var(--mute)}
 details summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:12px 0 4px;font-weight:700;cursor:pointer}details summary::-webkit-details-marker{display:none}details summary em{color:var(--or);font-style:normal;font-size:14px}
 .star{background:none;border:0;font-size:24px;color:#c4cbd8;padding:4px 8px}.star.on{color:var(--or)}
 .df{display:flex;justify-content:space-between;gap:10px;margin-top:6px;font-size:14px}.df s{color:var(--mute)}
-nav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:5}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--navbg);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:5}
 nav button{flex:1;background:none;border:0;padding:9px 0 8px;color:var(--mute);font-size:12px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:3px;position:relative}
 nav button.on{color:var(--or)}nav svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 nav i{position:absolute;top:4px;left:calc(50% + 6px);background:var(--red);color:#fff;border-radius:99px;font-style:normal;font-size:11px;min-width:18px;padding:1px 5px}
-dialog{border:0;border-radius:22px;padding:18px;width:min(92vw,440px);max-height:90vh}dialog::backdrop{background:#071d4d99}
-.rs{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;margin:10px 0;cursor:pointer}.rs>b{display:block;font-size:17px;margin-bottom:6px;text-transform:uppercase}.rs .df s{text-decoration:none}
+dialog{border:0;border-radius:22px;padding:22px;background:var(--dlg);color:var(--ink);width:min(92vw,440px);max-height:90vh}dialog::backdrop{background:#071d4d99}
+.rs{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin:10px 0;cursor:pointer}.rs>b{display:block;font-size:17px;margin-bottom:6px;text-transform:uppercase}.rs .df s{text-decoration:none}
 .ab{background:linear-gradient(135deg,#009688,#00796b);color:#fff;border-radius:22px;padding:18px;box-shadow:0 8px 20px #00796b44}.ab .r1{display:flex;justify-content:space-between;gap:10px;font-size:19px}.ab .r2{display:flex;justify-content:space-between;align-items:flex-end;margin:14px 0;font-size:14px;text-align:right}
 .ab .bd{background:#ffffff33;border-radius:10px;padding:8px 12px;font-weight:800;font-size:16px}.ab .stt{background:#00000030;border-radius:10px;padding:10px 12px}
 .bm{background:var(--or);color:#fff;border:0;border-radius:12px;padding:9px 13px;font-weight:700;white-space:nowrap}.row .d .pill.bgx{background:#8a94a8}textarea{resize:vertical}
+.gr{flex:none;width:52px;height:52px;color:var(--ink)}.gb{height:7px;border-radius:99px;background:var(--line);margin-top:9px;overflow:hidden}.gb i{display:block;height:100%;border-radius:99px}
+.ths{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.ths button{border:1.5px solid var(--line);background:var(--card);border-radius:14px;padding:12px 4px;font-weight:700}.ths button.on{border-color:var(--or);color:var(--or)}
+:root[data-os="clara"]{--bg:#f2f2f7;--card:#fff;--ink:#000;--mute:#8a8a8e;--line:rgba(60,60,67,.18);--or:#e5173f;--navy:#1c1c1e;--navbg:rgba(249,249,249,.86)}
+:root[data-os="clara"] .card{box-shadow:none;border:1px solid var(--line);border-radius:16px}
+:root[data-os="clara"] nav{-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+:root[data-os="clara"] h2.o{color:var(--ink);font-size:28px;letter-spacing:-.5px}
+:root[data-os="glass"]{--bg:#dfe6ff;--card:rgba(255,255,255,.55);--ink:#1b1b3d;--mute:#5d6189;--line:rgba(255,255,255,.75);--or:#6a5cff;--navy:#2b2a6b;--inp:rgba(255,255,255,.6);--dlg:#f1f0ff;--navbg:rgba(255,255,255,.55)}
+:root[data-os="glass"] body{font-family:ui-rounded,"SF Pro Rounded",Nunito,system-ui,sans-serif;background:radial-gradient(50% 40% at 15% 10%,rgba(255,120,200,.45),transparent 70%),radial-gradient(45% 40% at 90% 25%,rgba(90,200,255,.45),transparent 70%),radial-gradient(60% 50% at 50% 100%,rgba(140,110,255,.5),transparent 70%),var(--bg);background-attachment:fixed}
+:root[data-os="glass"] .card,:root[data-os="glass"] .rs{-webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%);border:1px solid var(--line);box-shadow:0 10px 40px rgba(80,70,200,.15);border-radius:26px}
+:root[data-os="glass"] h2.o{font-weight:300;font-size:32px;letter-spacing:-1px;background:linear-gradient(90deg,var(--or),#ff6ec4);-webkit-background-clip:text;background-clip:text;color:transparent}
+:root[data-os="glass"] nav{top:50%;bottom:auto;left:auto;right:8px;width:auto;transform:translateY(-50%);flex-direction:column;padding:10px 6px;border:1px solid var(--line);border-radius:999px;box-shadow:0 12px 40px rgba(60,50,180,.25);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px)}
+:root[data-os="glass"] nav button{padding:11px;border-radius:50%}
+:root[data-os="glass"] nav button span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:root[data-os="glass"] nav i{left:auto;right:0}
+:root[data-os="glass"] main,:root[data-os="glass"] header{padding-right:74px}:root[data-os="glass"] #ap{padding-bottom:24px}
 </style></head>
 <body>
 <!-- ================= CONNEXION ================= -->
@@ -99,6 +114,8 @@ dialog{border:0;border-radius:22px;padding:18px;width:min(92vw,440px);max-height
    <div class="card"><details><summary>Indicateurs de suivi <em>Voir les indicateurs ⌄</em></summary><div class="kp" id="kp"></div></details></div>
   </section>
   <section id="p-s"><h2 class="o">Suivi client</h2>
+   <input id="sfq" type="search" inputmode="search" autocomplete="off" placeholder="Rechercher dans mes clients (nom, décodeur, n°, téléphone)">
+   <label for="sso">Trier par</label><select id="sso"><option value="ec">Date d'échéance (la plus proche)</option><option value="en">Date d'enregistrement (récent)</option><option value="al">Ordre alphabétique</option></select>
    <div class="chips" id="sf"><button data-f="all" class="on">Tous</button><button data-f="fav">Favoris</button><button data-f="rel">À relancer</button><button data-f="rap">Rappels</button></div>
    <div class="card" id="sl"></div></section>
   <section id="p-r"><h2 class="o">Relance</h2>
@@ -109,6 +126,8 @@ dialog{border:0;border-radius:22px;padding:18px;width:min(92vw,440px);max-height
   <section id="p-n"><h2 class="o">Alertes</h2><div id="nl"></div></section>
   <section id="p-c"><h2 class="o">Paramètres</h2>
    <div class="card"><p><b id="cn"></b><br><span class="msg" id="ce"></span></p></div>
+   <div class="card"><h3 style="margin:12px 0 4px">Apparence</h3><div class="msg">Relance+ et Verre : jauge en cercle. Clara : jauge en barre. Vert à partir de 20 jours, orange de 6 à 19 jours, rouge à 5 jours et moins ou échu.</div>
+    <div class="ths" id="ths"><button data-o="relance">Relance+</button><button data-o="clara">Clara</button><button data-o="glass">Verre</button></div></div>
    <div class="card"><h3 style="margin:10px 0 0">Message de relance</h3><p class="msg">Ce modèle est proposé à chaque relance, et vous pouvez toujours le modifier avant l'envoi.</p>
     <label for="sck">Canal par défaut</label><select id="sck"><option value="wa">WhatsApp</option><option value="sms">SMS</option></select>
     <label for="sci">Indicatif du pays</label><input id="sci" inputmode="numeric" autocomplete="off">
@@ -125,11 +144,11 @@ dialog{border:0;border-radius:22px;padding:18px;width:min(92vw,440px);max-height
    <button class="btn lt" id="out">Se déconnecter</button></section>
  </main>
  <nav id="nv">
-  <button data-p="h" class="on"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</button>
-  <button data-p="s"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5c2 .7 3.5 2.4 3.5 5.5"/></svg>Suivi</button>
-  <button data-p="r"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg>Relance</button>
-  <button data-p="n"><svg viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0 1 12 0v6l2 2H4zM10 21h4"/></svg>Alertes<i id="nb" hidden></i></button>
-  <button data-p="c"><svg viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg>Paramètres</button>
+  <button data-p="h" class="on"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Accueil</span></button>
+  <button data-p="s"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5c2 .7 3.5 2.4 3.5 5.5"/></svg><span>Suivi</span></button>
+  <button data-p="r"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg><span>Relance</span></button>
+  <button data-p="n"><svg viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0 1 12 0v6l2 2H4zM10 21h4"/></svg><span>Alertes</span><i id="nb" hidden></i></button>
+  <button data-p="c"><svg viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg><span>Paramètres</span></button>
  </nav>
 </div>
 
@@ -156,7 +175,7 @@ const day0=()=>{const d=new Date();return new Date(d.getFullYear(),d.getMonth(),
 const pdate=s=>{const m=/(\d+)\/(\d+)\/(\d+)/.exec(s||"");return m?new Date(+m[3],m[2]-1,+m[1]):null},fr=s=>s?s.split("-").reverse().join("/"):"—";
 const dl=s=>s?Math.round((new Date(s+"T00:00:00")-day0())/864e5):null;
 const fnd=(o,k,r=[])=>{if(o&&typeof o==="object")for(const x in o){if(x===k&&o[x])r.push(String(o[x]));else fnd(o[x],k,r)}return r};
-const lab=n=>n==null?"—":n<0?"Échu J"+n:n===0?"Aujourd'hui":n===1?"Demain":"J + "+n,cl=n=>n==null?"bgx":n<=0?"bg0":n===1?"bg1":n===2?"bg2":n===3?"bg3":"bg4";
+const lab=n=>n==null?"—":n<0?"Échu J"+n:n===0?"Aujourd'hui":n===1?"Demain":"J + "+n,cl=n=>n==null?"bgx":n<=5?"bg0":n<20?"bg1":"bg3";
 const say=(id,t,c)=>{const e=$(id);e.textContent=t||"";e.className="msg"+(c?" "+c:"")};
 async function A(b){try{const r=await fetch("/.netlify/functions/relance-auth",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(b)});let d={};try{d=await r.json()}catch(e){}return{ok:r.ok,d}}catch(e){return{ok:false,d:{message:"Connexion internet indisponible."}}}}
 /* ---- écrans de connexion ---- */
@@ -186,15 +205,21 @@ $("vg").onclick=async()=>{const u=$("vu").value.trim(),p=$("vp").value;if(!u||!p
 /* ---- base clients (sauvegarde) ---- */
 const save=()=>wr(K("db"),DB),list=()=>Object.values(DB);
 const ini=n=>(String(n).trim().split(/\s+/).map(w=>w[0]).slice(0,2).join("")||"?").toUpperCase();
-function rowH(c){const n=dl(c.f);return`<div class="row" data-d="${E(c.d)}"><div class="av ${cl(n)}">${E(ini(c.n))}</div><div class="i"><b>${E(c.n)}</b><small>Décodeur : ${E(c.d)} • ${E(n9(c.t))}</small></div><div class="d">${lab(n)}<br><span class="pill ${c.re&&c.re===c.f?"bgx":cl(n)}">${c.re&&c.re===c.f?"Relancé":"À relancer"}</span></div></div>`}
+const gc=n=>n==null?"#8a94a8":n<=5?"#e53935":n<20?"#f59e0b":"#2e9e57",gp=n=>n==null?0:n<0?100:Math.round(Math.min(30,Math.max(0,n))/30*100),mode=()=>document.documentElement.dataset.os==="clara"?"bar":"ring";
+function ring(n){return`<svg class="gr" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="var(--line)" stroke-width="5"/><circle cx="24" cy="24" r="20" fill="none" stroke="${gc(n)}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${(gp(n)*1.2566).toFixed(1)} 125.7" transform="rotate(-90 24 24)"/><text x="24" y="29" text-anchor="middle" font-size="${n!=null&&Math.abs(n)>99?11:14}" font-weight="800" fill="currentColor">${n==null?"?":n}</text></svg>`}
+const lead=(c,n)=>mode()==="ring"?ring(n):`<div class="av" style="background:var(--navy)">${E(ini(c.n))}</div>`,bar=n=>mode()==="bar"?`<div class="gb"><i style="width:${gp(n)}%;background:${gc(n)}"></i></div>`:"";
+function rowH(c){const n=dl(c.f),dn=c.re&&c.re===c.f;return`<div class="row" data-d="${E(c.d)}">${lead(c,n)}<div class="i"><b>${E(c.n)}</b><small>Décodeur : ${E(c.d)} • ${E(n9(c.t))}</small>${bar(n)}</div><div class="d">${lab(n)}<br><span class="pill ${dn?"bgx":cl(n)}">${dn?"Relancé":"À relancer"}</span></div></div>`}
 function home(){const L=list().map(c=>({c,n:dl(c.f)})).filter(x=>x.n!=null&&x.n>=-5&&x.n<=jours()).sort((a,b)=>a.n-b.n);
  $("hj").textContent="Échéances dans les "+jours()+" prochains jours";$("hl").innerHTML=L.slice(0,5).map(x=>rowH(x.c)).join("")||'<p class="msg">Aucune échéance dans les 5 prochains jours.</p>';$("hm").hidden=L.length<=5;
  const all=list(),due=all.filter(c=>{const n=dl(c.f);return n!=null&&n>=0&&n<=jours()}).length,ech=all.filter(c=>{const n=dl(c.f);return n!=null&&n<0}).length;
  $("kp").innerHTML=[[all.length,"Clients enregistrés"],[due,"À relancer ("+jours()+" jours)"],[ech,"Échus"],[all.filter(c=>c.v).length,"Favoris"]].map(k=>`<div><b>${k[0]}</b><small>${k[1]}</small></div>`).join("")}
-function suivi(){let L=list().map(c=>({c,n:dl(c.f)}));const t=iso(day0());
+const nz=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+function suivi(){const q=nz($("sfq").value.trim()),so=$("sso").value;let L=list().map(c=>({c,n:dl(c.f)}));const t=iso(day0());
  if(filt==="fav")L=L.filter(x=>x.c.v);else if(filt==="rel")L=L.filter(x=>x.n!=null&&x.n<=jours());else if(filt==="rap")L=L.filter(x=>x.c.r&&x.c.r<=t);
- L.sort((a,b)=>(a.n==null)-(b.n==null)||a.n-b.n);
- $("sl").innerHTML=L.map(x=>{const c=x.c;return`<div class="row" data-d="${E(c.d)}"><div class="av ${cl(x.n)}">${E(ini(c.n))}</div><div class="i"><b>${E(c.n)}</b><small>${E(n9(c.t))} • fin ${fr(c.f)}${c.r?" • rappel "+fr(c.r):""}</small></div><button class="star${c.v?" on":""}" data-s="${E(c.d)}" aria-label="Favori">★</button></div>`}).join("")||'<p class="msg">Aucun client dans cette vue.</p>'}
+ if(q)L=L.filter(x=>nz([x.c.n,x.c.d,x.c.a,x.c.t].join(" ")).includes(q));
+ L.sort(so==="al"?(a,b)=>nz(a.c.n).localeCompare(nz(b.c.n)):so==="en"?(a,b)=>(b.c.u||0)-(a.c.u||0):(a,b)=>(a.n==null)-(b.n==null)||a.n-b.n);
+ $("sl").innerHTML=L.map(x=>{const c=x.c;return`<div class="row" data-d="${E(c.d)}">${lead(c,x.n)}<div class="i"><b>${E(c.n)}</b><small>${E(n9(c.t))} • fin ${fr(c.f)}${c.r?" • rappel "+fr(c.r):""}</small>${bar(x.n)}</div><button class="star${c.v?" on":""}" data-s="${E(c.d)}" aria-label="Favori">★</button></div>`}).join("")||'<p class="msg">Aucun client dans cette vue.</p>'}
+$("sfq").oninput=suivi;$("sso").onchange=()=>{wr(K("so"),$("sso").value);suivi()};
 $("sf").onclick=e=>{const b=e.target.closest("button[data-f]");if(!b)return;filt=b.dataset.f;$("sf").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));suivi()};
 $("sl").onclick=e=>{const s=e.target.closest("button[data-s]");if(s){const c=DB[s.dataset.s];if(c){c.v=!c.v;save();suivi();home()}return}const r=e.target.closest(".row");if(r)fiche(r.dataset.d)};
 $("hl").onclick=e=>{const r=e.target.closest(".row");if(r)fiche(r.dataset.d)};$("hm").onclick=()=>{filt="rel";$("sf").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x.dataset.f==="rel"));go("s")};
@@ -217,7 +242,7 @@ async function search(){const v=$("sq").value.trim(),box=$("sr");box.innerHTML="
 $("sr").onclick=async e=>{const c=e.target.closest(".rs");if(!c)return;const r=RES[+c.dataset.i];say("sm","Chargement de la fiche…");
  try{const x=await vinfo(r.d);say("sm","");detail({...x,n:r.n||x.n,a:r.a||x.a,o:r.fm||x.o,l:r.l||x.l})}catch(er){say("sm",er.message,"ko")}};
 function detail(x){const n=dl(x.f),st=n==null?"Échéance inconnue":n<0?"Abonnement échu depuis "+(-n)+" jour"+(n<-1?"s":""):n===0?"L'abonnement expire aujourd'hui":"Abonnement actif : expire dans "+n+" jour"+(n>1?"s":""),s=DB[x.d];
- $("sr").innerHTML=`<h3 style="margin:16px 2px 8px">Infos sur l'abonné</h3><div class="ab"><div class="r1"><b>${E(x.n)}</b><b>${E(x.a)}</b></div><div>${E(x.d)}</div><div class="r2"><span class="bd">${E(x.o||"—")}</span><span>${x.s?"Début : "+E(x.s)+"<br>":""}Expire le : ${E(x.f||"—")}</span></div><div class="stt">${E(st)}</div></div>`+
+ $("sr").innerHTML=`<h3 style="margin:16px 2px 8px">Infos sur l'abonné</h3><div class="ab"><div class="r1"><b>${E(x.n)}</b><b>${E(x.a)}</b></div><div>${E(x.d)}</div><div class="r2"><span class="bd">${E(x.o||"—")}</span><span>${x.s?"Début : "+E(x.s)+"<br>":""}Expire le : ${E(x.f||"—")}</span></div><div class="stt">${E(st)}</div><div class="gb" style="background:#ffffff40;margin-top:14px"><i style="width:${gp(n)}%;background:${n==null?"#ccc":gc(n)}"></i></div></div>`+
  (s?`<button class="btn lt" id="sv" style="margin-top:12px">Voir la fiche enregistrée</button>`:`<label for="stt" style="display:block;margin-top:12px">Téléphone du client (obligatoire pour enregistrer)</label><input id="stt" type="tel" inputmode="tel" placeholder="6XXXXXXXX"><button class="btn" id="sv">Enregistrer le client</button>`);
  $("sv").onclick=()=>{if(s){fiche(x.d);return}if(!okT($("stt").value)){say("sm","Téléphone obligatoire : 9 chiffres commençant par 6 (Veo Pro ne le fournit pas).","ko");return}
   DB[x.d]={d:x.d,n:x.n,a:x.a,o:x.o,f:x.f,s:x.s||"",l:x.l||"",t:n9($("stt").value),v:false,r:"",m:"",u:Date.now()};save();say("sm","Client enregistré.","ok");$("sr").innerHTML="";$("sq").value="";home();suivi();alerts()}}
@@ -266,18 +291,24 @@ $("rsd").onclick=()=>{const c=DB[rcur],m=$("rtx").value.trim();if(!m){say("rme",
  c.rl=(c.rl||[]).concat({t:Date.now(),k:rk}).slice(-20);c.re=c.f;save();say("rme","Message ouvert dans "+(rk==="wa"?"WhatsApp":"vos SMS")+" : envoyez-le puis revenez ici.","ok");home();suivi();alerts();relList()};
 function relList(){const L=list().map(c=>({c,n:dl(c.f)})).filter(x=>x.n!=null&&x.n<=jours()&&x.n>=-30).sort((a,b)=>a.n-b.n);
  $("rq").innerHTML='<h3 style="margin:12px 0 0">À relancer ('+L.filter(x=>!(x.c.re&&x.c.re===x.c.f)).length+")</h3>"+(L.map(x=>{const c=x.c,done=c.re&&c.re===c.f,l=(c.rl||[]).slice(-1)[0];
-  return`<div class="row" data-d="${E(c.d)}"><div class="av ${done?"bgx":cl(x.n)}">${E(ini(c.n))}</div><div class="i"><b>${E(c.n)}</b><small>${done&&l?"Relancé le "+new Date(l.t).toLocaleDateString("fr-FR")+" ("+(l.k==="wa"?"WhatsApp":"SMS")+")":lab(x.n)+" • "+n9(c.t)}</small></div><button class="bm" data-r="${E(c.d)}">${done?"Renvoyer":"Relancer"}</button></div>`}).join("")||'<p class="msg">Aucun client à relancer pour le moment.</p>')}
+  return`<div class="row" data-d="${E(c.d)}">${lead(c,x.n)}<div class="i"><b>${E(c.n)}</b><small>${done&&l?"Relancé le "+new Date(l.t).toLocaleDateString("fr-FR")+" ("+(l.k==="wa"?"WhatsApp":"SMS")+")":lab(x.n)+" • "+n9(c.t)}</small>${bar(x.n)}</div><button class="bm" data-r="${E(c.d)}">${done?"Renvoyer":"Relancer"}</button></div>`}).join("")||'<p class="msg">Aucun client à relancer pour le moment.</p>')}
 $("rq").onclick=e=>{const b=e.target.closest("button[data-r]");if(b){openRel(b.dataset.r);return}const r=e.target.closest(".row");if(r)fiche(r.dataset.d)};
 function cfgShow(){const g=cfg();$("sck").value=g.canal;$("sci").value=g.ind;$("scs").value=g.sig;$("scm").value=g.msg}
 $("scv").onclick=()=>{wr(K("cfg"),{canal:$("sck").value,ind:$("sci").value.replace(/\D/g,"")||"237",sig:$("scs").value.trim(),msg:$("scm").value.trim()||CFG0.msg});say("scx","Paramètres enregistrés.","ok")};
 $("scr").onclick=()=>{$("scm").value=CFG0.msg;say("scx","Modèle par défaut rétabli : touchez « Enregistrer les paramètres ».")};
+/* ---- thèmes ---- */
+const TC={relance:"#071d4d",clara:"#f2f2f7",glass:"#dfe6ff"};
+function setOS(o){o=TC[o]?o:"relance";document.documentElement.dataset.os=o;try{LS.setItem("rp_os",o)}catch(e){}
+ const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=TC[o];$("ths").querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.o===o));
+ if(!$("ap").hidden){home();suivi();alerts();relList()}}
+$("ths").onclick=e=>{const b=e.target.closest("button[data-o]");if(b)setOS(b.dataset.o)};
 /* navigation */
 function go(p){document.querySelectorAll("main>section").forEach(s=>s.classList.toggle("on",s.id==="p-"+p));document.querySelectorAll("#nv button").forEach(b=>b.classList.toggle("on",b.dataset.p===p));
  if(p==="h")home();if(p==="s")suivi();if(p==="r")relList();if(p==="c")cfgShow();if(p==="n"){alerts();if(promo==null)loadPromo()}scrollTo(0,0)}
 $("nv").onclick=e=>{const b=e.target.closest("button[data-p]");if(b)go(b.dataset.p)};
 function boot(){$("au").hidden=true;$("ap").hidden=false;DB=rd(K("db"),{});const nm=LS.getItem("rp_n_"+EM)||EM.split("@")[0];$("hn").textContent=nm;$("cn").textContent=nm;$("ce").textContent=EM;
  $("hd").textContent=new Date().toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"});const vc=rd(K("vc"),null);if(vc)$("vu").value=vc.u;$("cd").value=String(jours());
- go("h");alerts();pushDue()}
+ $("sso").value=rd(K("so"),"ec");setOS(document.documentElement.dataset.os);go("h");alerts();pushDue()}
 (async()=>{if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
  const c=await A({action:"config"});if(c.ok&&c.d.invite)$("iv").hidden=false;
  if(TK&&EM){const v=await A({action:"verify",token:TK});if(v.ok||v.d.message==="Connexion internet indisponible."){boot();return}}
