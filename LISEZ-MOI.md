@@ -15,3 +15,9 @@ Les clients enregistrés sont conservés sur l'appareil (pas de synchronisation 
 - Relance > « À relancer » : bouton Relancer sur chaque client (aussi depuis sa fiche). Choix WhatsApp ou SMS, message préparé et modifiable avant l'envoi.
 - Paramètres > Message de relance : canal par défaut, indicatif, signature et modèle du message (variables {salut} {civilite} {nom} {decodeur} {lieu} {expire} {moment} {signature} {formule} {fin} {abonne}). Délai « Relancer et prévenir » : 1 à 7 jours avant l'échéance.
 - Après l'envoi, le client passe en « Relancé » jusqu'à ce que son échéance change.
+
+## Version 1.3 : thèmes, jauge, tri et recherche
+- Paramètres > Apparence : thèmes Relance+, Clara et Verre. Jauge en cercle (Relance+, Verre) ou en barre (Clara), partout où un client est listé et dans la fiche détaillée.
+- Couleurs : vert à partir de 20 jours, orange de 6 à 19 jours, rouge à 5 jours et moins ou échu.
+- Suivi : recherche dans les clients sauvegardés (nom, décodeur, n° d'abonné, téléphone) et tri par échéance, date d'enregistrement ou ordre alphabétique.
+- Mise en page plus aérée (police et espacements).
